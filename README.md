@@ -4,9 +4,9 @@ Sistema web para administração de farmácia, permitindo o gerenciamento de cli
 
 ## Desenvolvedores
 
-* [Gabriel Coelho Costa](github.com/gabrielzinCoelho)
-* [Harisson de Carvalho Alvarenga]()
-* [Isac Gonçalves Cunha](github.com/Caquizeraa)
+* [Gabriel Coelho Costa](https://github.com/gabrielzinCoelho)
+* [Harisson de Carvalho Alvarenga](https://github.com/harissonalvarenga)
+* [Isac Gonçalves Cunha](https://github.com/Caquizeraa)
 
 ## Tecnologias Utilizadas
 
