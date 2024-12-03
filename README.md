@@ -10,7 +10,8 @@ Sistema web para administração de farmácia, permitindo o gerenciamento de cli
 
 ## Tecnologias Utilizadas
 
-* Linguagem: X v0.0
-* Banco de Dados: X v0.0
-* Back-End: X v0.0
-* Front-End: X v0.0
+* Linguagem: JavaScript (versão associada ao ambiente de execução)
+* Banco de Dados: PostgreSQL v17.2
+* Back-End: Node.js v22.11.0 + fastify v5.1.0
+* Front-End: React v18.3.1 + vite 6.0.2
+
