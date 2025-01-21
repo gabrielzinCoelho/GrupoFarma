@@ -1,7 +1,15 @@
+import { ThemeProvider} from 'styled-components'
+import { GlobalStyle } from "./styles/global"
+import { defaultTheme } from './styles/themes/default'
+import { Login } from './pages/Login'
+
 function App() {
 
   return (
-    <h1>Grupo Farma</h1>
+    <ThemeProvider theme={defaultTheme}>
+      <GlobalStyle />
+      <Login />
+    </ThemeProvider>
   )
 }
 
