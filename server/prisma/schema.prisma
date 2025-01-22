@@ -1,0 +1,113 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Client {
+  id    String @id @default(uuid())
+  name  String
+  email String
+  cpf   String @unique
+  sales Sale[]
+
+  @@map("clients")
+}
+
+model Salesperson {
+  id            String @id @default(uuid())
+  name          String
+  email         String @unique
+  password_hash String
+  sales         Sale[]
+
+  @@map("salespersons")
+}
+
+model Category {
+  id       String    @id @default(uuid())
+  name     String    @unique
+  products Product[]
+
+  @@map("categories")
+}
+
+model Product {
+  id           String   @id @default(uuid())
+  anvisa_code  String   @unique
+  name         String
+  price        Decimal  @db.Decimal()
+  how_to_use   String
+  side_effects String
+  category     Category @relation(fields: [category_id], references: [id])
+  category_id  String
+
+  saleProducts Sale_Products[]
+
+  @@map("products")
+}
+
+model PaymentMethod {
+  id    String @id @default(uuid())
+  name  String @unique
+  sales Sale[]
+
+  @@map("payment_methods")
+}
+
+model Coupon {
+  id                  String  @id @default(uuid())
+  name                String  @unique
+  discount_percentage Decimal @db.Decimal()
+  sales               Sale[]
+
+  @@map("coupons")
+}
+
+model Sale {
+  id           String   @id @default(uuid())
+  datetime     DateTime @default(now())
+  delivery_fee Decimal  @default(0) @db.Decimal()
+  total_price  Decimal  @db.Decimal()
+
+  client    Client @relation(fields: [client_id], references: [id])
+  client_id String
+
+  salesperson    Salesperson @relation(fields: [salesperson_id], references: [id])
+  salesperson_id String
+
+  paymentMethod     PaymentMethod @relation(fields: [payment_method_id], references: [id])
+  payment_method_id String
+
+  coupon    Coupon? @relation(fields: [coupon_id], references: [id])
+  coupon_id String?
+
+  saleProducts Sale_Products[]
+
+  @@unique([datetime, client_id, salesperson_id])
+  @@map("sales")
+}
+
+model Sale_Products {
+  id     String  @id @default(uuid())
+  amount Int
+  price  Decimal @db.Decimal()
+
+  sale    Sale   @relation(fields: [sale_id], references: [id])
+  sale_id String
+
+  product    Product @relation(fields: [product_id], references: [id])
+  product_id String
+
+  @@unique([sale_id, product_id])
+  @@map("sale_products")
+}
