@@ -2,7 +2,9 @@ import { ThemeProvider} from 'styled-components'
 import { GlobalStyle } from "./styles/global"
 import { defaultTheme } from './styles/themes/default'
 //import { Login } from './pages/Login'
-import { Sidebar } from './components/Sidebar'
+import { CriarProduto } from './pages/CriarProduto'
+
+
 
 function App() {
 
@@ -10,7 +12,8 @@ function App() {
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
       {/* <Login /> */}
-      <Sidebar/>
+      <CriarProduto/>
+
     </ThemeProvider>
   )
 }

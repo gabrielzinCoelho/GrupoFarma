@@ -1,4 +1,4 @@
-import { SidebarContainer, SidebarHeader, Profile, MenuList, MenuItem, SubMenu } from "./styles";
+import { SidebarContainer, SidebarHeader, SidebarContent, Profile, MenuList, MenuItem, SubMenu } from "./styles";
 import { useState } from "react";
 import logo from '../../assets/logo.png'
 import profilepic from '../../assets/profile-pic.png'
@@ -21,41 +21,42 @@ export function Sidebar() {
         </div>
       </SidebarHeader>
 
-      {/* Profile */}
-      <Profile>
-        <img src={profilepic} alt="User" className="profilepic"/>
-        <div>
-          <h3>Isac</h3>
-          <span>Admin</span>
-        </div>
-        <img src={profileoptions} alt="User" className="profileoptions"/>
-      </Profile>
+      <SidebarContent>
+        {/* Profile */}
+        <Profile>
+          <img src={profilepic} alt="User" className="profilepic"/>
+          <div>
+            <h3>Isac</h3>
+            <span>Admin</span>
+          </div>
+          <img src={profileoptions} alt="User" className="profileoptions"/>
+        </Profile>
 
-      {/* Lista de menus */}
-      <MenuList>
-        <MenuItem>
-          <img src={iconvendas} className="icon"/>
-          <span>Vendas</span>
-        </MenuItem>
+        {/* Lista de menus */}
+        <MenuList>
+          <MenuItem>
+            <img src={iconvendas} className="icon"/>
+            <span>Vendas</span>
+          </MenuItem>
 
-        <MenuItem onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}>
-          <img src={iconprodutos} className="icon"/>
-          <span>Produtos</span>
-          <img src={iconarrow} className={`arrow ${isSubMenuOpen ? "open" : ""}`}/>
-        </MenuItem>
-        {isSubMenuOpen && (
-          <SubMenu>
-            <li><span>Lista de Produtos</span></li>
-            <li><span>Categorias</span></li>
-          </SubMenu>
-        )}
+          <MenuItem onClick={() => setIsSubMenuOpen(!isSubMenuOpen)}>
+            <img src={iconprodutos} className="icon"/>
+            <span>Produtos</span>
+            <img src={iconarrow} className={`arrow ${isSubMenuOpen ? "open" : ""}`}/>
+          </MenuItem>
+          {isSubMenuOpen && (
+            <SubMenu>
+              <li><span>Lista de Produtos</span></li>
+              <li><span>Categorias</span></li>
+            </SubMenu>
+          )}
 
-        <MenuItem>
-          <img src={iconclientes} className="icon"/>
-          <span>Clientes</span>
-        </MenuItem>
-      </MenuList>
-
+          <MenuItem>
+            <img src={iconclientes} className="icon"/>
+            <span>Clientes</span>
+          </MenuItem>
+        </MenuList>
+      </SidebarContent>
     </SidebarContainer>
   );
 }

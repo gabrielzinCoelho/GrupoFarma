@@ -10,7 +10,6 @@ export const SidebarContainer = styled.aside`
   flex-direction: column;
   align-items: center;
   padding: 0;
-
 `;
 
 export const SidebarHeader = styled.aside`
@@ -43,6 +42,16 @@ export const SidebarHeader = styled.aside`
   }
 `;
 
+// Novo container para o conteúdo com sombra
+export const SidebarContent = styled.div`
+  width: 100%;
+  flex-grow: 1;
+  box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+`;
 
 export const Profile = styled.div`
   width: 100%;
@@ -50,7 +59,7 @@ export const Profile = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0; /* Espaçamento interno menor e consistente */
+  padding: 1rem 0;
   gap: 16px;
   margin: 1.5rem;
 
@@ -60,7 +69,6 @@ export const Profile = styled.div`
     height: 64px;
     border-radius: 4px;
     border: 2px solid ${(props) => props.theme["yellow-400"]};
-    
   }
 
   div {
@@ -80,13 +88,13 @@ export const Profile = styled.div`
     }
   }
 
-  .profileoptions{
-      object-fit: contain;
-      width: 6px;
-      height: 25px;
-    
-      margin-left: 30%;
-      margin-bottom: 5%;
+  .profileoptions {
+    object-fit: contain;
+    width: 6px;
+    height: 25px;
+    margin-left: 30%;
+    margin-bottom: 5%;
+  }
 `;
 
 export const MenuList = styled.ul`
@@ -118,16 +126,15 @@ export const MenuItem = styled.li`
     flex: 1;
     font-size: 1.2rem;
     font-weight: 500;
-    
-  } 
+  }
 
   .arrow {
-    transition: transform 0.3s ease; /* Adiciona uma transição suave */
-    transform: rotate(-90deg); /* Rotação padrão */
+    transition: transform 0.3s ease;
+    transform: rotate(-90deg);
   }
 
   .arrow.open {
-    transform: rotate(0deg); /* Rotação quando o submenu está aberto */
+    transform: rotate(0deg);
   }
 
   &:hover {
@@ -160,4 +167,4 @@ export const SubMenu = styled.ul`
       background-color: ${(props) => props.theme["slate-600"]};
     }
   }
-`
+`;
