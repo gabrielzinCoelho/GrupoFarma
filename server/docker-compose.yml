@@ -1,0 +1,12 @@
+services:
+  api-grupo-farma-pg:
+    image: bitnami/postgresql:latest
+    container_name: api-grupo-farma-pg
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRESQL_USERNAME=root
+      - POSTGRESQL_PASSWORD=root
+      - POSTGRESQL_DATABASE=grupofarma
+    volumes:
+      - ./postgres-data:/bitnami/postgresql
