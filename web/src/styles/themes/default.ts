@@ -17,6 +17,7 @@ export const defaultTheme = {
 
   'zinc-300': '#d4d4d8',
 
+  'red-500': '#ef4444',
   'red-600': '#dc2626',
 
   'yellow-400': '#facc15',
