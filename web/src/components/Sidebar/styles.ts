@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const SidebarContainer = styled.aside`
-  width: 20%;
+  width: 20%; //24rem
   max-width: 384px;
   height: 100vh;
   background-color: ${(props) => props.theme["slate-700"]};
