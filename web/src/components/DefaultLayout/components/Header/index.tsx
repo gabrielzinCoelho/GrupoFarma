@@ -1,14 +1,24 @@
 import { useState, useEffect } from "react";
 import { HeaderContainer, HeaderTime } from "./styles";
-import iconsol from "../../assets/icon-sol.png";
-import iconlua from "../../assets/icon-lua.png";
+import iconsol from "../../../../assets/icon-sol.png";
+import iconlua from "../../../../assets/icon-lua.png";
 
 export function Header() {
+
+  const timeFormatter = (date : Date) => {
+    const dia = date.getDate(); // Dia
+    const mes = date.toLocaleString("pt-BR", { month: "long" }); // Nome do mês
+    const ano = date.getFullYear(); // Ano
+    const horario = date.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); // Hora
+    return `${dia} de ${mes} de ${ano} ${horario}`;
+  }
+
   // Tempo, Frase e Icone iniciais
-  const [tempo, setTempo] = useState<string>("");
+  const [tempo, setTempo] = useState<string>(
+    timeFormatter(new Date())
+  );
   const [frase, setFrase] = useState<string>("Bom dia");
   const [icon, setIcon] = useState<string>(iconsol);
-
 
   // Função que atualiza o relógio
   const updateRelogio = (): void => {
@@ -29,22 +39,13 @@ export function Header() {
     }
   };
 
-  // Função para obter a data e hora formatada
-  const updateTempo = (): string => {
-    const agora = new Date();
-    const dia = agora.getDate(); // Dia
-    const mes = agora.toLocaleString("pt-BR", { month: "long" }); // Nome do mês
-    const ano = agora.getFullYear(); // Ano
-    const horario = agora.toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" }); // Hora
-    return `${dia} ${mes} ${ano} ${horario}`;
-  };
-
-  // Atualizar o relógio a cada segundo
+  // Atualizar o relógio
   useEffect(() => {
     const interval = setInterval(() => {
-      setTempo(updateTempo());
+      const agora = new Date();
+      setTempo(timeFormatter(agora));
       updateRelogio();
-    }, 1000);
+    }, 1000 * 30);
 
     return () => clearInterval(interval);
   }, []);

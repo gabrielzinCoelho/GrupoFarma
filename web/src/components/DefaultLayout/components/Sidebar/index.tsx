@@ -1,12 +1,12 @@
-import { SidebarContainer, SidebarHeader, SidebarContent, Profile, MenuList, MenuItem, SubMenu } from "./styles";
+import { SidebarContainer, SidebarHeader, SidebarContent, Profile, MenuList, MenuItem, SubMenu, UserProfile } from "./styles";
 import { useState } from "react";
-import logo from '../../assets/logo.png'
-import profilepic from '../../assets/profile-pic.png'
-import profileoptions from '../../assets/profile-options.png'
-import iconvendas from '../../assets/menu-vendas.png'
-import iconprodutos from '../../assets/menu-produtos.png'
-import iconclientes from '../../assets/menu-clientes.png'
-import iconarrow from '../../assets/menu-arrow.png'
+import logo from '../../../../assets/logo.png'
+import profilepic from '../../../../assets/profile-pic.png'
+import profileoptions from '../../../../assets/profile-options.png'
+import iconvendas from '../../../../assets/menu-vendas.png'
+import iconprodutos from '../../../../assets/menu-produtos.png'
+import iconclientes from '../../../../assets/menu-clientes.png'
+import iconarrow from '../../../../assets/menu-arrow.png'
 
 export function Sidebar() {
   const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -15,21 +15,23 @@ export function Sidebar() {
     <SidebarContainer>
       {/* Header */}
       <SidebarHeader>
-        <div className="logo">
+        <div>
           <img src={logo} alt="Grupo Farma" />
-          <h2>Grupo Farma</h2>
         </div>
+        <h2>Grupo Farma</h2>
       </SidebarHeader>
 
       <SidebarContent>
         {/* Profile */}
         <Profile>
-          <img src={profilepic} alt="User" className="profilepic"/>
-          <div>
-            <h3>Isac</h3>
-            <span>Admin</span>
-          </div>
-          <img src={profileoptions} alt="User" className="profileoptions"/>
+          <UserProfile>
+            <img src={profilepic} alt="User"/>
+            <div>
+              <h3>Isac</h3>
+              <span>Admin</span>
+            </div>
+          </UserProfile>
+          <img src={profileoptions} alt="User"/>
         </Profile>
 
         {/* Lista de menus */}

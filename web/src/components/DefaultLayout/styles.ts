@@ -6,7 +6,7 @@ export const PageContainer = styled.div`
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-`;
+`
 
 
 export const ContentContainer = styled.div`
@@ -14,8 +14,7 @@ export const ContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: 100vh;
-  overflow: auto;
-`;
+`
 
 export const MainContainer = styled.div`
   flex: 1;
@@ -30,4 +29,4 @@ export const MainContainer = styled.div`
   margin-left: 2.4rem;
   margin-right: 2.4rem;
   overflow: auto;
-`;
+`
