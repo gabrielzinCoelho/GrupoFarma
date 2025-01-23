@@ -28,6 +28,24 @@ export function Router() {
           <Route path='new' element={<CriarProduto />} />
         </Route>
 
+        {/* Categorias */}
+        <Route path='categories'>
+          <Route index element={<h1>View Categories</h1>} />
+          <Route path='new' element={<h1>New Category</h1>} />
+        </Route>
+
+        {/* Clientes */}
+        <Route path='clients'>
+          <Route index element={<h1>View Clients</h1>} />
+          <Route path='new' element={<h1>New Client</h1>} />
+        </Route>
+
+        {/* Vendas */}
+        <Route path='sales'>
+          <Route index element={<h1>View Sales</h1>} />
+          <Route path='new' element={<h1>New Sale</h1>} />
+        </Route>
+
       </Route>
 
       {/* Rota Default */}

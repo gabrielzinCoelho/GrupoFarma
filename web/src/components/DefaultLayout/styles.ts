@@ -13,7 +13,7 @@ export const ContentContainer = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100%;
 `
 
 export const MainContainer = styled.div`
