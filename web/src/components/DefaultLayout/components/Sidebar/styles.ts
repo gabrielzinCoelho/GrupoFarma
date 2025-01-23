@@ -14,7 +14,7 @@ export const SidebarContainer = styled.aside`
 export const SidebarHeader = styled.aside`
   width:100%;
   height: 12%;
-  min-height: 6rem;
+  min-height: 4rem;
   max-height: 8rem;
   background-color: ${(props) => props.theme["slate-800"]};
   display: flex;
@@ -38,11 +38,10 @@ export const SidebarHeader = styled.aside`
   }
 `;
 
-// Novo container para o conteúdo com sombra
 export const SidebarContent = styled.div`
   width: 100%;
   flex: 1;
-  box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+  box-shadow: 4px 0px 8px rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column;
   align-items: center;

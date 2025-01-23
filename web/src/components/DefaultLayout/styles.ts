@@ -18,15 +18,9 @@ export const ContentContainer = styled.div`
 
 export const MainContainer = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items:left;
+  box-sizing: border-box;
   width: 100%;
-  height: 100vh;
-  margin-top: 1.6rem;
-  margin-bottom: 1.2rem;
-  margin-left: 2.4rem;
-  margin-right: 2.4rem;
-  overflow: auto;
+  margin: 2rem 0; 
+  padding: 0 3rem; 
+  overflow: hidden;
 `
