@@ -24,7 +24,7 @@ export function CriarProduto() {
                 label="Cancelar"
                 icon={iconCancelar}
                 color="orange-500"
-                widthInRem={8}
+                widthInRem={7}
                 iconWidthInPx={12}
               />
               <SecondaryButton

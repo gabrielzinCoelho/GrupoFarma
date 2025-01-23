@@ -38,6 +38,6 @@ export const ButtonContainer = styled.div`
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
-  gap: 3rem; /* Adiciona espaçamento entre os botões */
+  gap: 2.4rem;
   overflow: auto;
 `;
