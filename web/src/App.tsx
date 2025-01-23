@@ -1,8 +1,8 @@
 import { ThemeProvider} from 'styled-components'
 import { GlobalStyle } from "./styles/global"
 import { defaultTheme } from './styles/themes/default'
-//import { Login } from './pages/Login'
-import { CriarProduto } from './pages/CriarProduto'
+import { BrowserRouter } from 'react-router-dom'
+import { Router } from './components/Router'
 
 
 
@@ -11,8 +11,9 @@ function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
-      {/* <Login /> */}
-      <CriarProduto/>
+      <BrowserRouter>
+        <Router />
+      </BrowserRouter>
 
     </ThemeProvider>
   )
