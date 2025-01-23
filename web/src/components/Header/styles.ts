@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.aside`
-  width: 80%;
-  max-width: 1536px;
+  width: 100%;
+  
   height: 12%;
   max-height: 96px;
   background-color: ${(props) => props.theme["slate-50"]};

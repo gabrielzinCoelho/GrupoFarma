@@ -1,13 +1,43 @@
-import {PageContainer} from "./styles";
-import { Sidebar } from '../../components/Sidebar'
-import { Header } from '../../components/Header'
+import { PageContainer, ContentContainer, MainContainer, ButtonContainer} from "./styles";
+import { Sidebar } from '../../components/Sidebar';
+import { Header } from '../../components/Header';
+import { SecondaryButton } from '../../components/SecondaryButton'
+import { PageTitle } from '../../components/PageTitle'
+import iconCriar from '../../assets/icon-criar.png'
+import iconCancelar from '../../assets/icon-cancelar.png'
 
-export function CriarProduto(){
-
-    return (
-        <PageContainer>
-            <Sidebar/>
-            <Header/>
-        </PageContainer>
-    )
+export function CriarProduto() {
+  return (
+    <PageContainer>
+      <Sidebar />
+      <ContentContainer>
+        <Header />
+        <MainContainer>
+            <PageTitle
+              title="Produtos"
+              title2="Lista de Produtos"
+              subtitle="Novo Produto"
+              description="Registre um novo produto."
+            />
+            <ButtonContainer>
+            <SecondaryButton
+                label="Cancelar"
+                icon={iconCancelar}
+                color="orange-500"
+                widthInRem={8}
+                iconWidthInPx={12}
+              />
+              <SecondaryButton
+                label="Criar Produto"
+                color="green-500"
+                icon={iconCriar}
+                widthInRem={9}
+                iconWidthInPx={16}
+              />
+              
+            </ButtonContainer>
+        </MainContainer>  
+      </ContentContainer>
+    </PageContainer>
+  );
 }
