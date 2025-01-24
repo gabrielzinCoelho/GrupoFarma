@@ -1,38 +1,46 @@
 import styled from "styled-components";
 
-export const Title = styled.aside`
+export const Title = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  .title {
-    font-size: 1.3rem;
-    margin-right: 0.3rem;
-    color: rgba(30, 41, 59, 0.5);
-  }
-
-  img{
-    margin-top: .4rem;
-    margin-right: 0.4rem;
-  }
-
-  .subtitle {
-    font-size: 1.3rem;
-    color: ${(props) => props.theme["slate-800"]};
-  }
-
-  .description {
-    font-size: .9rem;
-    font-weight: 600; 
-    color: ${(props) => props.theme["slate-800"]};
-    margin-top: 0.1rem;
-  }
+  gap: 0.2rem;
 `;
 
-export const TitleContainer = styled.aside`
+export const TitleText = styled.h1`
+  font-size: 1.3rem;
+  color: rgba(30, 41, 59, 0.5);
+`
+
+export const SubtitleText = styled.h1`
+  font-size: 1.3rem;
+  color: ${(props) => props.theme["slate-800"]};
+`
+
+export const TitleContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  gap: 0.3rem;
+
+  span {
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.3rem;
+
+    svg {
+    color: ${props => props.theme["slate-800"]}
+  }
+
+  }
+
+  
+
 `;
+
+export const DescriptionText = styled.h1`
+  font-size: .9rem;
+  font-weight: 600; 
+  color: ${(props) => props.theme["slate-800"]};
+`

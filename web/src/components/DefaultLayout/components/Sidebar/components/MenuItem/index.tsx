@@ -39,8 +39,9 @@ export function MenuItem({ url, urlRedirect, currentUrl, icon, label, isDropdown
       {
         isDropdown && !!subMenu && isActive &&
         subMenu.map(
-          subMenuItem => (
-            <SubMenu 
+          (subMenuItem, index) => (
+            <SubMenu
+              key={`${index}${subMenuItem.label}`} 
               url={subMenuItem.url}
               label={subMenuItem.label} 
               currentUrl={currentUrl}

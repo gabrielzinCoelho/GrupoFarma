@@ -14,10 +14,10 @@ interface SecondaryButtonProps {
 export function SecondaryButton({  label, color, icon, widthInRem, iconWidthInPx, disabled = false, onClick }: SecondaryButtonProps) {
   return (
     <Button
-      widthInRem={widthInRem}
+      $widthInRem={widthInRem}
       color={color}
       disabled={disabled}
-      iconWidthInPx={iconWidthInPx}
+      $iconWidthInPx={iconWidthInPx}
       onClick={() => onClick?.()}
       type="button"
     >

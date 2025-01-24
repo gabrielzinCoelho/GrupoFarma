@@ -1,28 +1,30 @@
-import { Title, TitleContainer } from "./styles";
-import iconTitle from "../../assets/icon-title.png";
+import { DescriptionText, SubtitleText, Title, TitleContainer, TitleText } from "./styles";
+import { CaretRight } from "phosphor-react";
 
 interface PageTitleProps {
-  title: string;
-  title2?: string;
-  subtitle: string;
-  description: string;
+  titles: string[]
+  description: string
 }
 
-export function PageTitle({ title, title2, subtitle, description }: PageTitleProps) {
+export function PageTitle({ titles, description }: PageTitleProps) {
+
+  const _titles = titles.slice(0, -1)
+  const subtitle = titles[titles.length - 1]
+
   return (
     <Title>
       <TitleContainer>
-        <h1 className="title">{title}</h1>
-        <img src={iconTitle}/>
-        {title2 && (
-          <>
-            <h1 className="title">{title2}</h1>
-            <img src={iconTitle}/>
-          </>
-        )}
-        <h1 className="subtitle">{subtitle}</h1>
+        {
+          _titles.map((title, index) => (
+            <span key={index}>
+              <TitleText>{title}</TitleText>
+              <CaretRight size={16}/>
+            </span>
+          ))
+        }
+        <SubtitleText>{subtitle}</SubtitleText>
       </TitleContainer>
-      <h3 className="description">{description}</h3>
+      <DescriptionText>{description}</DescriptionText>
     </Title>
   );
 }

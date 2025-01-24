@@ -1,9 +1,12 @@
-import { ButtonContainer, FormContainer, MultipleInputContainer, PageContainer, ContentContainer} from "./styles";
+import { ButtonContainer, FormContainer, MultipleInputContainer, PageContainer, ContentContainer, PageContentContainer } from "./styles";
 import { SecondaryButton } from '../../components/SecondaryButton'
 import { PageTitle } from '../../components/PageTitle'
 import iconCriar from '../../assets/icon-criar.png'
 import iconCancelar from '../../assets/icon-cancelar.png'
 import { FormInput } from "../../components/FormInput";
+import { FormTextarea } from "../../components/FormTextarea";
+import { FormSelect } from "../../components/FormSelect";
+import { Check } from "phosphor-react";
 
 
 export function CriarProduto() {
@@ -11,26 +14,43 @@ export function CriarProduto() {
   return (
     <ContentContainer>
       <PageContainer>
-        <PageTitle
-          title="Produtos"
-          title2="Lista de Produtos"
-          subtitle="Novo Produto"
-          description="Registre um novo produto."
-        />
-        <FormContainer>
-          <MultipleInputContainer>
-            <FormInput type="text" label="Código" placeholder="Informe um valor" value="Informe um valor"></FormInput>
-            <FormInput type="text" label="Nome" placeholder="Informe um valor" value="Informe um valor"></FormInput>
-          </MultipleInputContainer>
-          <MultipleInputContainer>
-            <FormInput type="text" label="Categoria" placeholder="Selecione uma categoria" value="Selecione uma categoria"></FormInput>
-            <FormInput type="text" label="Valor" placeholder="Informe um valor" value="Informe um valor"></FormInput>
-          </MultipleInputContainer>
-          <FormInput rows={2} type="text" label="Como usar" placeholder="Informe como o produto deve ser consumido
-" value="Informe como o produto deve ser consumido
-"></FormInput>
-          <FormInput rows={4} type="text" label="Efeitos Colaterais e contraindicações" placeholder="Informe os efeitos colaterais e contraindicações do produto" value="Informe os efeitos colaterais e contraindicações do produto"></FormInput>
-        </FormContainer>
+        <PageContentContainer>
+          <PageTitle
+            titles={['Produtos', 'Lista de Produtos', 'Novo Produto']}
+            description="Registre um novo produto."
+          />
+          <FormContainer>
+            <MultipleInputContainer>
+              <FormInput type="text" label="Código" placeholder="Informe o código do produto" />
+              <FormInput type="text" label="Nome" placeholder="Informe o nome do produto" />
+            </MultipleInputContainer>
+            <MultipleInputContainer>
+              <FormSelect 
+                label="Categoria" 
+                placeholder="Selecione uma categoria"
+                CheckedIcon={Check}
+                options={[
+                  "Categoria 1",
+                  "Categoria 2",
+                  "Categoria 3",
+                  "Categoria 4",
+                  "Categoria 5"
+                ]}
+              />
+              <FormInput type="text" label="Valor" placeholder="Informe um valor" />
+            </MultipleInputContainer>
+            <FormTextarea 
+              label="Como usar" 
+              placeholder="Informe como o produto deve ser consumido"
+              rows={2}
+            />
+            <FormTextarea 
+              label="Efeitos Colaterais e contraindicações" 
+              placeholder="Informe os efeitos colaterais e contraindicações do produto"
+              rows={10}
+            />
+          </FormContainer>
+        </PageContentContainer>
         <ButtonContainer>
           <SecondaryButton
             label="Cancelar"
