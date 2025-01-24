@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { Login } from "../pages/Login";
 import { DefaultLayout } from "./DefaultLayout";
 import { CriarProduto } from "../pages/CriarProduto";
+import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
 
 export function Router() {
 
@@ -26,6 +27,7 @@ export function Router() {
         <Route path='products'>
           <Route index element={<h1>View Products</h1>} />
           <Route path='new' element={<CriarProduto />} />
+          <Route path='view' element={<ListarProdutoDetalhado />} />
         </Route>
 
         {/* Categorias */}

@@ -19,17 +19,17 @@ export function CriarProduto() {
         />
         <FormContainer>
           <MultipleInputContainer>
-            <FormInput type="text" label="Código" placeholder="Informe um valor" value="Informe um valor"></FormInput>
-            <FormInput type="text" label="Nome" placeholder="Informe um valor" value="Informe um valor"></FormInput>
+            <FormInput label="Código" placeholder="Informe um valor" value="Informe um valor"></FormInput>
+            <FormInput label="Nome" placeholder="Informe um valor" value="Informe um valor"></FormInput>
           </MultipleInputContainer>
           <MultipleInputContainer>
-            <FormInput type="text" label="Categoria" placeholder="Selecione uma categoria" value="Selecione uma categoria"></FormInput>
-            <FormInput type="text" label="Valor" placeholder="Informe um valor" value="Informe um valor"></FormInput>
+            <FormInput label="Categoria" placeholder="Selecione uma categoria" value="Selecione uma categoria"></FormInput>
+            <FormInput label="Valor" placeholder="Informe um valor" value="Informe um valor"></FormInput>
           </MultipleInputContainer>
-          <FormInput rows={2} type="text" label="Como usar" placeholder="Informe como o produto deve ser consumido
+          <FormInput rows={2} label="Como usar" placeholder="Informe como o produto deve ser consumido
 " value="Informe como o produto deve ser consumido
 "></FormInput>
-          <FormInput rows={4} type="text" label="Efeitos Colaterais e contraindicações" placeholder="Informe os efeitos colaterais e contraindicações do produto" value="Informe os efeitos colaterais e contraindicações do produto"></FormInput>
+          <FormInput rows={4} label="Efeitos Colaterais e contraindicações" placeholder="Informe os efeitos colaterais e contraindicações do produto" value="Informe os efeitos colaterais e contraindicações do produto"></FormInput>
         </FormContainer>
         <ButtonContainer>
           <SecondaryButton
