@@ -63,6 +63,7 @@ export const SelectContent = styled(Select.Content)`
   margin-left: -0.1rem;
 `
 export const SelectViewport = styled(Select.Viewport)`
+  width: var(--radix-select-trigger-width);;
 `
 
 export const SelectItem = styled(Select.Item)`

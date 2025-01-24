@@ -7,9 +7,11 @@ interface InputProps {
   minLength?: number
   maxLength?: number
   required?: boolean
+  value: string,
+  onChange: (newValue : string) => void
 }
 
-export function FormTextarea({ label, placeholder, rows, minLength, maxLength, required = true }: InputProps) {
+export function FormTextarea({ label, placeholder, rows, minLength, maxLength, value, onChange, required = true }: InputProps) {
   return (
     <InputContainer>
       <span>{label}</span>
@@ -21,6 +23,8 @@ export function FormTextarea({ label, placeholder, rows, minLength, maxLength, r
           required={required}
           spellCheck={false}
           rows={rows}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
         />
       </InputField>
     </InputContainer>

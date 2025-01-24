@@ -8,9 +8,11 @@ interface InputProps {
   minLength?: number;
   required?: boolean;
   Icon?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>,
+  value: string,
+  onChange: (newValue : string) => void
 }
 
-export function FormInput({ label, placeholder, Icon, minLength, required = true}: InputProps) {
+export function FormInput({ label, placeholder, Icon, minLength, value, onChange, required = true}: InputProps) {
   return (
     <InputContainer>
       <span>{label}</span>
@@ -20,6 +22,8 @@ export function FormInput({ label, placeholder, Icon, minLength, required = true
           minLength={minLength}
           required={required}
           spellCheck={false}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
         />
         {Icon && <Icon />}
       </InputField>

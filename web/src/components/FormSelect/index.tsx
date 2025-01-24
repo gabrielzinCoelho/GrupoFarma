@@ -1,5 +1,5 @@
 import * as Select from "@radix-ui/react-select";
-import { InputContainer, SelectContent, SelectItem, SelectItemIndicator, SelectTrigger } from "./styles";
+import { InputContainer, SelectContent, SelectItem, SelectItemIndicator, SelectTrigger, SelectViewport } from "./styles";
 import { IconProps } from "phosphor-react";
 
 interface InputProps {
@@ -8,22 +8,27 @@ interface InputProps {
   required?: boolean
   options: string[]
   CheckedIcon?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>
+  value: string,
+  onChange: (newValue : string) => void
 }
 
-export function FormSelect({ label, placeholder, options, CheckedIcon}: InputProps) {
+export function FormSelect({ label, placeholder, options, value, onChange, CheckedIcon}: InputProps) {
   return (
     <InputContainer>
       <span>{label}</span>
-      <Select.Root>
+      <Select.Root
+        value={value}
+        onValueChange={onChange}
+      >
         <SelectTrigger>
           <Select.Value placeholder={placeholder} />
           <Select.Icon />
         </SelectTrigger>
 
         <Select.Portal>
-          <SelectContent>
+          <SelectContent position="popper">
             <Select.ScrollUpButton />
-            <Select.Viewport>
+            <SelectViewport>
               {
                 options.map(option => (
                   <SelectItem value={option} key={option}>
@@ -39,7 +44,7 @@ export function FormSelect({ label, placeholder, options, CheckedIcon}: InputPro
                   </SelectItem>
                 ))
               }
-            </Select.Viewport>
+            </SelectViewport>
             <Select.ScrollDownButton />
             <Select.Arrow />
           </SelectContent>
