@@ -1,31 +1,31 @@
-import { IconProps } from "phosphor-react";
 import { InputContainer, InputField } from "./styles";
 
 interface InputProps {
-  type: 'text'
-  label: string;
-  placeholder: string;
-  minLength?: number;
-  required?: boolean;
-  Icon?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>,
+  label: string
+  placeholder: string
+  rows:number
+  minLength?: number
+  maxLength?: number
+  required?: boolean
   value: string,
   onChange: (newValue : string) => void
 }
 
-export function FormInput({ label, placeholder, Icon, minLength, value, onChange, required = true}: InputProps) {
+export function FormTextarea({ label, placeholder, rows, minLength, maxLength, value, onChange, required = true }: InputProps) {
   return (
     <InputContainer>
       <span>{label}</span>
       <InputField>
-        <input
+        <textarea
           placeholder={placeholder}
           minLength={minLength}
+          maxLength={maxLength}
           required={required}
           spellCheck={false}
+          rows={rows}
           value={value}
           onChange={(e) => onChange(e.target.value)}
         />
-        {Icon && <Icon />}
       </InputField>
     </InputContainer>
   );

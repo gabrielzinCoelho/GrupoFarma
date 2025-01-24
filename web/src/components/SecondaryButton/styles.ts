@@ -1,14 +1,14 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-  widthInRem?: number
-  iconWidthInPx?: number;
+  $widthInRem?: number
+  $iconWidthInPx?: number;
   color: string;
 }
 
 export const Button = styled.button<ButtonProps>`
 
-  width: ${ props => props.widthInRem === undefined ? '100%' : `${props.widthInRem}rem`};
+  width: ${ props => props.$widthInRem === undefined ? '100%' : `${props.$widthInRem}rem`};
   height: 50px;
   background: ${props => props.theme["slate-50"]};
   font-weight: 500;
@@ -25,8 +25,8 @@ export const Button = styled.button<ButtonProps>`
 
   img{
     object-fit: contain;
-    width: ${ props => props.iconWidthInPx === undefined ? '12' : `${props.iconWidthInPx}px`};
-    max-width: ${ props => props.iconWidthInPx === undefined ? '20' : `${props.iconWidthInPx + 4}px`};
+    width: ${ props => props.$iconWidthInPx === undefined ? '12' : `${props.$iconWidthInPx}px`};
+    max-width: ${ props => props.$iconWidthInPx === undefined ? '20' : `${props.$iconWidthInPx + 4}px`};
     margin-right: 0.4rem;
   }
 
@@ -34,6 +34,11 @@ export const Button = styled.button<ButtonProps>`
     background: ${props => props.theme['zinc-300']};
     transition: background-color 0.2s;
     cursor: pointer;
+  }
+
+  &:focus{
+    outline: none;
+    box-shadow: none;
   }
 
 `
