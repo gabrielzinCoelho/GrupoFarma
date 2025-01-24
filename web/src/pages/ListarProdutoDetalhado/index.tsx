@@ -12,9 +12,11 @@ export function ListarProdutoDetalhado() {
     <ContentContainer>
       <PageContainer>
         <PageTitle
-          title="Produtos"
-          title2="Lista de Produtos"
-          subtitle="PLACEHOLDER"
+          titles={[
+            "Produtos",
+            "Lista de Produtos",
+            "Antibiótico",
+          ]}
           description="Gerencie um produto."
         />
         <InfoContainer>
