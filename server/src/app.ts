@@ -4,6 +4,7 @@ import { env } from './env'
 import { salespersonRoutes } from './https/controllers/salesperson/routes'
 import fastifyJwt from '@fastify/jwt'
 import cors from '@fastify/cors'
+import { productsRoutes } from './https/controllers/product/routes'
 
 export const app = fastify()
 
@@ -18,6 +19,9 @@ app.register(fastifyJwt, {
 app.register(cors)
 
 app.register(salespersonRoutes)
+app.register(productsRoutes, {
+  prefix: '/products',
+})
 
 app.setErrorHandler((err, req, res) => {
   if (err instanceof ZodError) {
