@@ -30,7 +30,7 @@ export function Sidebar() {
           <UserProfile>
             <img src={profilepic} alt="User"/>
             <div>
-              <h3>{salespersonName + "Teste string grande"}</h3>
+              <h3>{salespersonName}</h3>
               <span>Admin</span>
             </div>
           </UserProfile>
