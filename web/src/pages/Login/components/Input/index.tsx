@@ -28,6 +28,7 @@ export function Input({type, label, placeholder, Icon, onClickIcon, value, onCha
           onChange={(e) => onChange(e.target.value)}
           minLength={minLength}
           required={required}
+          spellCheck={false}
         />
         <Icon
           onClick={()=>onClickIcon?.()}

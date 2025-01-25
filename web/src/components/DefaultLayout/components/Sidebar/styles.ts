@@ -53,7 +53,7 @@ export const Profile = styled.div`
   width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  gap: 2rem;
   padding: 4rem 2rem;
 
    img:last-child{
@@ -66,9 +66,11 @@ export const Profile = styled.div`
 
 export const UserProfile = styled.div`
 
+  flex: 1;
   display: flex;
   flex-direction: row;
   gap: 1rem;
+  overflow: hidden;
 
   img {
     width: 64px; 
@@ -78,13 +80,19 @@ export const UserProfile = styled.div`
   }
 
   div {
+    flex: 1;
     display: flex;
     flex-direction: column;
     height: 100%;
     justify-content: space-between;
+    overflow: hidden;
 
     h3 {
+      width: 100%;
       font-size: 1.6rem;
+      white-space: nowrap;      
+      overflow: hidden;         
+      text-overflow: ellipsis;  
     }
 
     span {

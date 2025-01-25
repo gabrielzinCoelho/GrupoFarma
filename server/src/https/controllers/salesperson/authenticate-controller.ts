@@ -17,7 +17,10 @@ export const authenticate = async (req: FastifyRequest, res: FastifyReply) => {
     const { salesperson } = await authService.execute({ email, password })
 
     const token = await res.jwtSign(
-      {},
+      {
+        name: salesperson.name,
+        email: salesperson.email,
+      },
       {
         sign: {
           sub: salesperson.id,

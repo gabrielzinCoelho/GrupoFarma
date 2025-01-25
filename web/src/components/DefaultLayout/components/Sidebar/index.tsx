@@ -5,9 +5,15 @@ import profilepic from '../../../../assets/profile-pic.png'
 import profileoptions from '../../../../assets/profile-options.png'
 import { Menu } from "./components/Menu";
 import { GearSix, SignOut, User } from "phosphor-react";
+import { useDispatch } from "react-redux";
+import { logout } from "../../../../store/auth-slice";
+import { useAppSelector } from "../../../../store";
 
 export function Sidebar() {
-  
+
+  const dispatch = useDispatch()
+  const {salespersonName} = useAppSelector(store => store.auth)
+
   return (
     <SidebarContainer>
       {/* Header */}
@@ -24,7 +30,7 @@ export function Sidebar() {
           <UserProfile>
             <img src={profilepic} alt="User"/>
             <div>
-              <h3>Isac</h3>
+              <h3>{salespersonName + "Teste string grande"}</h3>
               <span>Admin</span>
             </div>
           </UserProfile>
@@ -44,7 +50,7 @@ export function Sidebar() {
                   <span>Configurações</span>
                 </PopoverItem>
                 <PopoverItem
-                  onClick={() => window.alert('Saindo...')}
+                  onClick={() => dispatch(logout())}
                 >
                   <SignOut />
                   <span>Sair</span>
