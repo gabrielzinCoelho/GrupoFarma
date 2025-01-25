@@ -3,6 +3,7 @@ import { Login } from "../pages/Login";
 import { DefaultLayout } from "./DefaultLayout";
 import { CriarProduto } from "../pages/CriarProduto";
 import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
+import { VerifyAuthAndRedirect } from "./VerifyAuthAndRedirect";
 
 export function Router() {
 
@@ -12,13 +13,21 @@ export function Router() {
       {/* Rota de Loign */}
       <Route
         path='/login'
-        element={<Login />}
+        element={
+          <VerifyAuthAndRedirect to="/products" whenIsLogged>
+            <Login />
+          </VerifyAuthAndRedirect>
+        }
       />
 
       {/* Layout Padrão */}
       <Route
         path='/'
-        element={<DefaultLayout />}
+        element={
+          <VerifyAuthAndRedirect to="/login">
+            <DefaultLayout />
+          </VerifyAuthAndRedirect>
+        }
       >
         {/* Rota Raiz (/) */}
         <Route index element={<Navigate to='/products' replace />} />

@@ -3,6 +3,7 @@ import { ZodError } from 'zod'
 import { env } from './env'
 import { salespersonRoutes } from './https/controllers/salesperson/routes'
 import fastifyJwt from '@fastify/jwt'
+import cors from '@fastify/cors'
 
 export const app = fastify()
 
@@ -13,6 +14,8 @@ app.register(fastifyJwt, {
     expiresIn: '1h',
   },
 })
+
+app.register(cors)
 
 app.register(salespersonRoutes)
 

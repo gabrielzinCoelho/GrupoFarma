@@ -7,6 +7,9 @@ import { Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { EnvelopeSimple, Eye, EyeSlash } from "phosphor-react";
 import { useState } from "react";
+import { api } from "../../lib/axios";
+import { useDispatch } from "react-redux";
+import { login } from "../../store/auth-slice";
 
 const LoginFormSchema = z.object({
   email: z.string().email(),
@@ -17,7 +20,10 @@ type LoginFormInputs = z.infer<typeof LoginFormSchema>
 
 export function Login() {
 
+  const dispatch = useDispatch()
+
   const {
+    setValue,
     control,
     handleSubmit,
     formState: { isSubmitting }
@@ -25,8 +31,26 @@ export function Login() {
     resolver: zodResolver(LoginFormSchema)
   })
 
-  function handleFormSubmit(formData : LoginFormInputs) {
-    console.log(formData)
+  async function handleFormSubmit({ email, password }: LoginFormInputs) {
+    try {
+
+      const authResponse = await api.post('/sessions', {
+        email,
+        password
+      })
+
+      if (authResponse.status !== 200) throw new Error('Unauthorized Access')
+
+      const { token } = authResponse.data
+      dispatch(login({
+        token
+      }))
+    
+      //eslint-disable-next-line
+    } catch (err) {
+      setValue("password", '')
+    }
+
   }
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false)
@@ -79,7 +103,7 @@ export function Login() {
           <PrimaryButton
             label="Enviar"
             disabled={isSubmitting}
-            onClick={handleSubmit(handleFormSubmit)}  
+            onClick={handleSubmit(handleFormSubmit)}
           />
         </Form>
       </FormContainer>
