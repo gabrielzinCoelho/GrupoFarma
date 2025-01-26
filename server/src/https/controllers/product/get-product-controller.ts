@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export const getProduct = async (req: FastifyRequest, res: FastifyReply) => {
   const getProductParamsSchema = z.object({
-    id: z.string(),
+    id: z.string().uuid(),
   })
 
   const { id } = getProductParamsSchema.parse(req.params)
