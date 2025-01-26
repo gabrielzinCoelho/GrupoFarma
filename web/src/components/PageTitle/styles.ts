@@ -9,11 +9,17 @@ export const Title = styled.div`
 export const TitleText = styled.h1`
   font-size: 1.3rem;
   color: rgba(30, 41, 59, 0.5);
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;  
 `
 
 export const SubtitleText = styled.h1`
   font-size: 1.3rem;
   color: ${(props) => props.theme["slate-800"]};
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;  
 `
 
 export const TitleContainer = styled.div`
@@ -35,12 +41,13 @@ export const TitleContainer = styled.div`
 
   }
 
-  
-
-`;
+`
 
 export const DescriptionText = styled.h1`
   font-size: .9rem;
   font-weight: 600; 
   color: ${(props) => props.theme["slate-800"]};
+  white-space: nowrap;      
+  overflow: hidden;         
+  text-overflow: ellipsis;  
 `
