@@ -1,4 +1,4 @@
-import { CaretLeft } from "phosphor-react";
+import { CaretLeft, CaretRight } from "phosphor-react";
 import { CurrentPageContainer, PageSlideContainer } from "./styles";
 
 interface TableCurrentPageProps {
@@ -10,7 +10,7 @@ export function TableCurrentPage({page} : TableCurrentPageProps){
     <CurrentPageContainer>
       <PageSlideContainer><CaretLeft /></PageSlideContainer>
       <span>{`Pág. ${page}`}</span>
-      <PageSlideContainer><CaretLeft /></PageSlideContainer>
+      <PageSlideContainer><CaretRight /></PageSlideContainer>
     </CurrentPageContainer>
   )
 }

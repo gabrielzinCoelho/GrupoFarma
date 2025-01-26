@@ -3,6 +3,8 @@ import { PageTitle } from "../../components/PageTitle";
 import { ContentContainer, PageHeaderContainer, PageContentContainer } from "./styles";
 import { PrimaryButtonWithIcon } from "../../components/PrimaryButtonWithIcon";
 import { RegistersTable } from "../../components/RegistersTable";
+import { ColumnText } from "../../components/RegistersTable/components/ColumnText";
+import { ColumnActions } from "../../components/RegistersTable/components/ColumnActions";
 
 export function ListarProdutos() {
 
@@ -34,7 +36,7 @@ export function ListarProdutos() {
               {
                 label: 'Nome do Produto',
                 hasOrder: true,
-                percentWidth: 40
+                percentWidth: 35
               },
               {
                 label: 'Código',
@@ -44,7 +46,7 @@ export function ListarProdutos() {
               {
                 label: 'Categoria',
                 hasOrder: true,
-                percentWidth: 15
+                percentWidth: 20
               },
               {
                 label: 'Ações',
@@ -56,21 +58,183 @@ export function ListarProdutos() {
               [
                 {
                   value: 'Um texo para ordenar o registro',
-                  element: <h3>Coluna da tabela</h3>
+                  element: <ColumnText label="Antibiótico 500g" />
                 },
                 {
                   value: 'Um texo para ordenar o registro',
-                  element: <h3>Coluna da tabela</h3>
+                  element: <ColumnText label="DHIUYF0098455" />
                 },
                 {
                   value: 'Um texo para ordenar o registro',
-                  element: <h3>Coluna da tabela</h3>
+                  element: <ColumnText label="Anti-inflamatório" />
                 },
                 {
                   value: 'Um texo para ordenar o registro',
-                  element: <h3>Coluna da tabela</h3>
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
                 }
-              ]
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
+              [
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Antibiótico 500g" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="DHIUYF0098455" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnText label="Anti-inflamatório" />
+                },
+                {
+                  value: 'Um texo para ordenar o registro',
+                  element: <ColumnActions onRemove={() => {}} showMore={() => {}} />
+                }
+              ],
             ]}
           />
       </PageContentContainer>

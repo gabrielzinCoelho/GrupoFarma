@@ -9,7 +9,7 @@ interface TableResultsAmountProps {
 export function TableResultsAmount({firstIndex, lastIndex, resultsAmount} : TableResultsAmountProps){
   return (
     <TableResultsAmountContainer>
-      <span>Monstrando {firstIndex} - {lastIndex} de {resultsAmount}</span>
+      <span>Mostrando {firstIndex} - {lastIndex} resultados de {resultsAmount}</span>
     </TableResultsAmountContainer>
   )
 }

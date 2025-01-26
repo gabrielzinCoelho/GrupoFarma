@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TableContainer = styled.div`
-  height: 100%;
+  max-height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -19,7 +19,6 @@ export const Table = styled.table`
   display: flex;
   flex-direction: column;
   overflow: hidden;
-
   td {
     border-bottom: 1px solid ${props => props.theme["slate-500"]};
   }
@@ -74,7 +73,7 @@ interface TableBodyProps {
 export const TableBody = styled.tbody<TableBodyProps>`
   width: 100%;
   flex: 1;
-  overflow-y: hidden;
+  overflow-y: auto;
   max-height: ${props => `${props.$amountOfRegisters * 3}rem`};
 `
 

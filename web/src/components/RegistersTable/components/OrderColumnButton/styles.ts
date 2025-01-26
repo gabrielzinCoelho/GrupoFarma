@@ -16,13 +16,13 @@ export const OrderColumn = styled.div<OrderColumnProps>`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0.5rem;
-
-  background: ${props => props.$isActive ? props.theme["slate-800"] : props.theme["slate-500"]}
+  background: ${props => props.$isActive ? props.theme["slate-800"] : props.theme["slate-400"]};
+  cursor: pointer;
+  padding: 0 0.2rem;
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
     color: ${props => props.$isActive ? props.theme["slate-50"] : props.theme["slate-800"]}
   }
 
@@ -32,8 +32,8 @@ export const OrderColumn = styled.div<OrderColumnProps>`
   }
 
   &:last-child {
-    border-top-right-radius: 4px;
-    border-top-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
   }
 
 `
