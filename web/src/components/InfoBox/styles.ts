@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const Box = styled.aside`
+  height: 100%;
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -29,6 +30,7 @@ export const Divider = styled.div`
 `;
 
 export const InfoContainer = styled.aside`
+  flex: 1;
   padding: 1rem;
   display: flex;
   flex-direction: row;
