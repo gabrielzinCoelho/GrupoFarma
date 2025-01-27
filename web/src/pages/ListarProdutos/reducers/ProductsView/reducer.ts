@@ -43,7 +43,7 @@ export function ProductsViewReducer(state: ProductsViewState, action: any) {
         products,
         pageSize: state.pageSize,
         currentPage: page,
-        pagesAmount: Math.ceil(productsAmount / products.length),
+        pagesAmount: Math.ceil(productsAmount / state.pageSize),
         firstIndexResult,
         lastIndexResult: firstIndexResult + products.length - 1,
         productsAmount,

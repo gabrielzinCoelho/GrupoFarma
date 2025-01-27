@@ -13,10 +13,12 @@ async function seed() {
     new ProductSeed(prisma),
   ]
 
+  for (const seedInstance of seedInstances.slice().reverse())
+    await seedInstance.reset()
+
   for (const seedInstance of seedInstances) {
     await seedInstance
-      .reset()
-      .then(() => seedInstance.seed())
+      .seed()
       .then(() => console.log(`${seedInstance.name} seeded!`))
   }
 
