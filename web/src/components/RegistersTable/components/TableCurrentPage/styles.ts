@@ -15,16 +15,20 @@ export const CurrentPageContainer = styled.div`
 
 `
 
-export const PageSlideContainer = styled.div`
+interface PageSlideContainerProps {
+  $isAble: boolean
+}
+
+export const PageSlideContainer = styled.div<PageSlideContainerProps>`
 
   padding: 0.5rem 0.25rem;
-  background: ${props => props.theme["slate-50"]};
   border: 1px solid ${props => props.theme["slate-500"]};
   border-radius: 4px;
   display: flex;
   justify-content: center;
   align-items: center;
-  cursor: pointer;
+  cursor: ${props => props.$isAble ? 'pointer' : 'not-allowed'};
+  background: ${props => props.$isAble ? props.theme["slate-50"] : props.theme["zinc-300"]};
 
   svg {
     width: 1rem;

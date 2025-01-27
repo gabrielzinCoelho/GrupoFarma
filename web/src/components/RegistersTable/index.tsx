@@ -1,22 +1,32 @@
-import { ReactNode } from "react"
+import { ReactNode, useEffect, useReducer } from "react"
 import { PaginationContainer, Table, TableBody, TableContainer, TableHeader, TableHeaderItem, TableRow, TableRowItem } from "./styles"
 import { TableResultsAmount } from "./components/TableResultsAmount"
 import { TableCurrentPage } from "./components/TableCurrentPage"
 import { OrderColumnButton } from "./components/OrderColumnButton"
+import { OrderTypes, TableViewReducer, TableViewState } from "./reducers/TableView/reducer"
+import { newTableOrderAction, newTableRegistersAction } from "./reducers/TableView/actions"
+
+const defaultOrderCallback = (a : string, b: string) => (a.localeCompare(b))
 
 interface TablePagination{
   currentPage: number
   pageSize: number
   resultsAmount: number
+  firstIndex: number
+  lastIndex: number
+  pagesAmount: number
+  handleNextPage: () => void
+  handlePreviousPage: () => void
 }
 
-interface TableColumn {
+export interface TableColumn {
   label: string
   hasOrder: boolean
   percentWidth: number
+  orderCallback?: (a : string, b : string) => number
 }
 
-interface TableRegisterColumn {
+export interface TableRegisterColumn {
   value?: string,
   element: ReactNode
 }
@@ -26,12 +36,23 @@ interface RegistersTableProps {
   columns: TableColumn[]
   filters?: ReactNode
   pagination?: TablePagination
+  numRows: number
 }
 
-export function RegistersTable({registers, columns, filters, pagination} : RegistersTableProps){
+export function RegistersTable({registers, columns, filters, pagination, numRows} : RegistersTableProps){
 
-  const firstIndexPagination = pagination ? (pagination.pageSize * (pagination.currentPage - 1) + 1) : undefined
-  const amountOfRegisters = registers.length
+  const [tableViewState, dispatch] = useReducer(
+    TableViewReducer,
+    {
+      tableRegisters: [],
+    } as TableViewState
+  )
+
+  useEffect(() => {
+   dispatch(
+    newTableRegistersAction(registers)
+   )
+  }, [registers])
 
   return (
     <TableContainer>
@@ -43,16 +64,32 @@ export function RegistersTable({registers, columns, filters, pagination} : Regis
         <TableHeader>
           <tr>
             {
-              columns.map(({label, hasOrder, percentWidth}) => (
+              columns.map(({label, hasOrder, percentWidth, orderCallback}, index) => (
                 <TableHeaderItem $percentWidth={percentWidth} key={label}>
                   <span>{label}</span>
                   {
                     hasOrder &&
                     <OrderColumnButton 
-                      orderAsc={() => {}}
-                      orderDesc={() => {}}
-                      isOrderAsc={false}
-                      isOrderDesc={true}
+                      orderAsc={() => {
+                        dispatch(
+                          newTableOrderAction(
+                            index,
+                            OrderTypes.ASC,
+                            orderCallback ?? defaultOrderCallback
+                          )
+                        )
+                      }}
+                      orderDesc={() => {
+                        dispatch(
+                          newTableOrderAction(
+                            index,
+                            OrderTypes.DESC,
+                            orderCallback ?? defaultOrderCallback
+                          )
+                        )
+                      }}
+                      isOrderAsc={tableViewState.tableOrder ? tableViewState.tableOrder.indexColumn === index && tableViewState.tableOrder.order === OrderTypes.ASC : false}
+                      isOrderDesc={tableViewState.tableOrder ? tableViewState.tableOrder.indexColumn === index && tableViewState.tableOrder.order === OrderTypes.DESC : false}
                     />
                   }
                 </TableHeaderItem>
@@ -60,10 +97,11 @@ export function RegistersTable({registers, columns, filters, pagination} : Regis
             }
           </tr>
         </TableHeader>
-        <TableBody $amountOfRegisters={amountOfRegisters}>
+        <TableBody $numRows={numRows}>
           {
-            registers.length > 0 &&
-            registers.map((register, index) => (
+            tableViewState.tableRegisters && 
+            tableViewState.tableRegisters.length > 0 &&
+            tableViewState.tableRegisters.map((register, index) => (
               <TableRow key={index}>
                 {
                   register.map(({element}, index) => (
@@ -85,12 +123,15 @@ export function RegistersTable({registers, columns, filters, pagination} : Regis
         (
           <PaginationContainer>
             <TableResultsAmount
-              firstIndex={firstIndexPagination!}
-              lastIndex={firstIndexPagination! + pagination.pageSize - 1}
+              firstIndex={pagination.firstIndex}
+              lastIndex={pagination.lastIndex}
               resultsAmount={pagination.resultsAmount}
             />
             <TableCurrentPage
               page={pagination.currentPage}
+              pagesAmount={pagination.pagesAmount}
+              handleNextPage={pagination.handleNextPage}
+              handlePreviousPage={pagination.handlePreviousPage}
             />
           </PaginationContainer>
         )

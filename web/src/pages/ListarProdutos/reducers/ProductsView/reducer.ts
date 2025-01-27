@@ -1,4 +1,3 @@
-import { api } from "../../../../lib/axios"
 import { ProductViewActionTypes } from "./actions"
 
 export interface Product {
@@ -15,57 +14,40 @@ export interface Product {
   }
 }
 
-interface ProductsViewState {
+export interface ProductsViewState {
 
   products: Product[],
+
+  pageSize: number
   currentPage: number
   pagesAmount: number,
+
   firstIndexResult: number
   lastIndexResult: number
   productsAmount: number
-}
-
-const PAGE_SIZE = 10
-
-async function fetchProducts(userToken: string, page: number) : Promise<{products: Product[], productsAmount: number}> {
-
-  const fetchProductsResponse = await api.get('/products', {
-    params: {
-      page,
-    },
-    headers: {
-      'Authorization': `Bearer ${userToken}`
-    }
-  })
-
-  if (fetchProductsResponse.status !== 200) throw new Error("Fetch Products Failed.")
-
-  return {
-    products: fetchProductsResponse.data.products,
-    productsAmount: fetchProductsResponse.data.productsAmount
-  }
 
 }
 
 //eslint-disable-next-line
-export async function ProductsViewReducer(state: ProductsViewState, action: any) {
+export function ProductsViewReducer(state: ProductsViewState, action: any) {
 
   switch (action.type) {
 
     case ProductViewActionTypes.NEW_PRODUCTS_VIEW: {
-      
-      const userToken = action.payload.userToken
 
-      const {products, productsAmount} = await fetchProducts(userToken, 1)
+      const {products, productsAmount, page} = action.payload
+
+      const firstIndexResult = (page - 1) * state.pageSize + 1
 
       return {
         products,
+        pageSize: state.pageSize,
+        currentPage: page,
+        pagesAmount: Math.ceil(productsAmount / products.length),
+        firstIndexResult,
+        lastIndexResult: firstIndexResult + products.length - 1,
         productsAmount,
-        currentPage: 1,
-        pagesAmount: Math.ceil(productsAmount / PAGE_SIZE),
-        firstIndexResult: 1,
-        lastIndexResult: PAGE_SIZE
-      }
+      } as ProductsViewState
     }
 
     default:

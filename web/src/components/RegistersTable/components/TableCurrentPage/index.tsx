@@ -3,14 +3,25 @@ import { CurrentPageContainer, PageSlideContainer } from "./styles";
 
 interface TableCurrentPageProps {
   page: number
+  pagesAmount: number
+  handleNextPage: () => void
+  handlePreviousPage: () => void
 }
 
-export function TableCurrentPage({page} : TableCurrentPageProps){
+export function TableCurrentPage({page, pagesAmount, handleNextPage, handlePreviousPage} : TableCurrentPageProps){
+
+  const isPrevPageAble = page > 1
+  const isNextPageAble = page < pagesAmount
+
   return (
     <CurrentPageContainer>
-      <PageSlideContainer><CaretLeft /></PageSlideContainer>
+      <PageSlideContainer $isAble={isPrevPageAble} onClick={() => (isPrevPageAble && handlePreviousPage())}>
+        <CaretLeft />
+      </PageSlideContainer>
       <span>{`Pág. ${page}`}</span>
-      <PageSlideContainer><CaretRight /></PageSlideContainer>
+      <PageSlideContainer $isAble={isNextPageAble} onClick={() => (isNextPageAble && handleNextPage())}>
+        <CaretRight />
+      </PageSlideContainer>
     </CurrentPageContainer>
   )
 }

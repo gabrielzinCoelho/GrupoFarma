@@ -6,9 +6,13 @@ import { RegistersTable } from "../../components/RegistersTable";
 import { ColumnText } from "../../components/RegistersTable/components/ColumnText";
 import { ColumnActions } from "../../components/RegistersTable/components/ColumnActions";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useReducer } from "react";
 import { api } from "../../lib/axios";
 import { useAppSelector } from "../../store";
+import { ProductsViewReducer, ProductsViewState } from "./reducers/ProductsView/reducer";
+import { newProductsViewAction } from "./reducers/ProductsView/actions";
+
+const PAGE_SIZE = 10
 
 interface Product {
   name: string
@@ -28,32 +32,67 @@ export function ListarProdutos() {
 
   const navigate = useNavigate()
   const {token : userToken} = useAppSelector(store => store.auth)
-
-  const [products, setProducts] = useState<Product[]>([])
-
-  useEffect(() => {
-
-    async function fetchProducts(){
+  
+  const fetchProducts = useCallback(
+    async (page: number) : Promise<{products: Product[], productsAmount: number}>  => {
 
       const fetchProductsResponse = await api.get('/products', {
         params: {
-          page: 1
+          page,
         },
         headers: {
           'Authorization': `Bearer ${userToken}`
         }
       })
-
+    
       if (fetchProductsResponse.status !== 200) throw new Error("Fetch Products Failed.")
-      
-      setProducts(fetchProductsResponse.data.products)
+    
+      return {
+        products: fetchProductsResponse.data.products,
+        productsAmount: fetchProductsResponse.data.total
+      }
+    
+    },
+    [userToken]
+  )
 
+  
+
+  const [productsViewState, dispatch] = useReducer(
+    ProductsViewReducer,
+    {
+      products: [],
+      pageSize: PAGE_SIZE,
+      currentPage: 0,
+      pagesAmount: 0,
+      firstIndexResult: 0,
+      lastIndexResult: 0,
+      productsAmount: 0,
+    } as ProductsViewState
+  )
+
+  useEffect(() => {
+
+    async function initializeProductsViewState(){
+
+      const initialPage = 1
+
+      const {products, productsAmount} = await fetchProducts(initialPage)
+      dispatch(
+        newProductsViewAction(products, productsAmount, initialPage)
+      )
     }
 
-    fetchProducts()
+    initializeProductsViewState()
 
-  }, [userToken])
-  
+  }, [fetchProducts])
+
+  const handleChangePage = async (page: number) => {
+    const {products, productsAmount} = await fetchProducts(page)
+      dispatch(
+        newProductsViewAction(products, productsAmount, page)
+      )
+  }
 
   return (
     <ContentContainer>
@@ -74,10 +113,16 @@ export function ListarProdutos() {
       </PageHeaderContainer>
       <PageContentContainer>
           <RegistersTable
+            numRows={productsViewState.pageSize}
             pagination={{
-              pageSize: 10,
-              currentPage: 1,
-              resultsAmount: 117
+              pageSize: productsViewState.pageSize,
+              currentPage: productsViewState.currentPage,
+              resultsAmount: productsViewState.productsAmount,
+              firstIndex: productsViewState.firstIndexResult,
+              lastIndex: productsViewState.lastIndexResult,
+              pagesAmount: productsViewState.pagesAmount,
+              handleNextPage: () => handleChangePage(productsViewState.currentPage + 1),
+              handlePreviousPage: () => handleChangePage(productsViewState.currentPage - 1)
             }}
             columns={[
               {
@@ -102,8 +147,8 @@ export function ListarProdutos() {
               }
             ]}
             registers={
-              products.length > 0 ?
-                products.map(
+              productsViewState.products.length > 0 ?
+                productsViewState.products.map(
                   product => (
                     [
                       {

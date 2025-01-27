@@ -67,14 +67,13 @@ export const TableHeaderItem = styled.th<TableHeaderItemProps>`
 `
 
 interface TableBodyProps {
-  $amountOfRegisters: number
+  $numRows: number
 }
 
 export const TableBody = styled.tbody<TableBodyProps>`
   width: 100%;
-  flex: 1;
   overflow-y: auto;
-  max-height: ${props => `${props.$amountOfRegisters * 3}rem`};
+  height: ${props => `${props.$numRows * 3}rem`};
 `
 
 
