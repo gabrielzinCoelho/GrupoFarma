@@ -12,11 +12,12 @@ export const fetchProducts = async (req: FastifyRequest, res: FastifyReply) => {
 
   const fetchProductService = new FetchProductsService(prisma)
 
-  const { products } = await fetchProductService.execute({
+  const { products, total } = await fetchProductService.execute({
     page,
   })
 
   return res.status(200).send({
     products,
+    total,
   })
 }

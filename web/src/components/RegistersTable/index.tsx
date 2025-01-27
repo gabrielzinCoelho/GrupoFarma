@@ -62,6 +62,7 @@ export function RegistersTable({registers, columns, filters, pagination} : Regis
         </TableHeader>
         <TableBody $amountOfRegisters={amountOfRegisters}>
           {
+            registers.length > 0 &&
             registers.map((register, index) => (
               <TableRow key={index}>
                 {

@@ -16,7 +16,7 @@ interface ActionTriggerProps {
 
 export const ActionTrigger = styled.div<ActionTriggerProps>`
   
-  width: 100%;
+  width: max-content;
   height: 100%;
   cursor: pointer;
   display: flex;

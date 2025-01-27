@@ -13,7 +13,6 @@ interface TokenPayload {
 function decodeTokenPayload(token : string) : TokenPayload{
 
   const payload = jwtDecode<TokenPayload>(token)
-  console.log(payload)
   return payload
 }
 
