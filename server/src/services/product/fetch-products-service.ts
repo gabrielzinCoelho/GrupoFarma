@@ -1,4 +1,4 @@
-import { Product, PrismaClient, Prisma } from '@prisma/client'
+import { Product, PrismaClient, Prisma, Category } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
 
 interface FetchProductsServiceParams {
@@ -6,7 +6,10 @@ interface FetchProductsServiceParams {
 }
 
 interface FetchProductsServiceResponse {
-  products: Product[]
+  products: (Product & {
+    category: Category
+  })[]
+  total: number
 }
 
 export class FetchProductsService {
@@ -24,11 +27,17 @@ export class FetchProductsService {
     const PAGE_SIZE = 10
     const skip = (page - 1) * PAGE_SIZE
 
-    const products = await this.prisma.product.findMany({
-      skip,
-      take: PAGE_SIZE,
-    })
+    const [products, total] = await this.prisma.$transaction([
+      this.prisma.product.findMany({
+        skip,
+        take: PAGE_SIZE,
+        include: {
+          category: true,
+        },
+      }),
+      this.prisma.product.count(),
+    ])
 
-    return { products }
+    return { products, total }
   }
 }

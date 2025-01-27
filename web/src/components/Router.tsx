@@ -4,6 +4,7 @@ import { DefaultLayout } from "./DefaultLayout";
 import { CriarProduto } from "../pages/CriarProduto";
 import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
 import { VerifyAuthAndRedirect } from "./VerifyAuthAndRedirect";
+import { ListarProdutos } from "../pages/ListarProdutos";
 
 export function Router() {
 
@@ -34,7 +35,7 @@ export function Router() {
 
         {/* Produtos */}
         <Route path='products'>
-          <Route index element={<h1>View Products</h1>} />
+          <Route index element={<ListarProdutos />} />
           <Route path='new' element={<CriarProduto />} />
           <Route path='view' element={<ListarProdutoDetalhado />} />
         </Route>

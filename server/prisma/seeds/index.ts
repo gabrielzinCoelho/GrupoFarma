@@ -2,6 +2,7 @@ import { PrismaClient } from '@prisma/client'
 import { SalespersonSeed } from './salesperson'
 import { Seed } from './Seed'
 import { CategorySeed } from './category'
+import { ProductSeed } from './product'
 
 async function seed() {
   const prisma = new PrismaClient()
@@ -9,12 +10,15 @@ async function seed() {
   const seedInstances: Seed[] = [
     new SalespersonSeed(prisma),
     new CategorySeed(prisma),
+    new ProductSeed(prisma),
   ]
+
+  for (const seedInstance of seedInstances.slice().reverse())
+    await seedInstance.reset()
 
   for (const seedInstance of seedInstances) {
     await seedInstance
-      .reset()
-      .then(() => seedInstance.seed())
+      .seed()
       .then(() => console.log(`${seedInstance.name} seeded!`))
   }
 
