@@ -50,6 +50,7 @@ model Product {
   side_effects String
   category     Category @relation(fields: [category_id], references: [id])
   category_id  String
+  is_active    Boolean  @default(true)
 
   saleProducts Sale_Products[]
 
@@ -102,7 +103,7 @@ model Sale_Products {
   amount Int
   price  Decimal @db.Decimal()
 
-  sale    Sale   @relation(fields: [sale_id], references: [id])
+  sale    Sale   @relation(fields: [sale_id], references: [id], onDelete: Cascade)
   sale_id String
 
   product    Product @relation(fields: [product_id], references: [id])
