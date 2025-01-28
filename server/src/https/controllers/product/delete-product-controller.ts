@@ -16,7 +16,7 @@ export const deleteProduct = async (req: FastifyRequest, res: FastifyReply) => {
     id,
   })
 
-  return res.status(201).send({
+  return res.status(200).send({
     product,
   })
 }

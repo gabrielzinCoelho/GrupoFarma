@@ -102,7 +102,7 @@ model Sale_Products {
   amount Int
   price  Decimal @db.Decimal()
 
-  sale    Sale   @relation(fields: [sale_id], references: [id])
+  sale    Sale   @relation(fields: [sale_id], references: [id], onDelete: Cascade)
   sale_id String
 
   product    Product @relation(fields: [product_id], references: [id])
