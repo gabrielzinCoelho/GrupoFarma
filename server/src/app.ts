@@ -5,6 +5,7 @@ import { salespersonRoutes } from './https/controllers/salesperson/routes'
 import fastifyJwt from '@fastify/jwt'
 import cors from '@fastify/cors'
 import { productsRoutes } from './https/controllers/product/routes'
+import { salesRoutes } from './https/controllers/sale/routes'
 
 export const app = fastify()
 
@@ -21,6 +22,9 @@ app.register(cors)
 app.register(salespersonRoutes)
 app.register(productsRoutes, {
   prefix: '/products',
+})
+app.register(salesRoutes, {
+  prefix: '/sales',
 })
 
 app.setErrorHandler((err, req, res) => {
