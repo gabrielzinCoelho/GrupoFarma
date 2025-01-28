@@ -1,4 +1,5 @@
 import { prisma } from '@/lib/prisma'
+import { CheckIfProductIsActiveService } from '@/services/product/check-if-product-is-active-service'
 import { UpdateProductService } from '@/services/product/update-product-service'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
@@ -22,7 +23,11 @@ export const updateProduct = async (req: FastifyRequest, res: FastifyReply) => {
 
   const { id } = updateProducParamsSchema.parse(req.params)
 
-  const updateProductService = new UpdateProductService(prisma)
+  const checkProductService = new CheckIfProductIsActiveService(prisma)
+  const updateProductService = new UpdateProductService(
+    prisma,
+    checkProductService,
+  )
 
   const { product } = await updateProductService.execute({
     id,

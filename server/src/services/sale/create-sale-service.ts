@@ -40,6 +40,7 @@ export class CreateSaleService {
           await this.prisma.product.findUniqueOrThrow({
             where: {
               id: product.id,
+              is_active: true,
             },
           }),
       ),

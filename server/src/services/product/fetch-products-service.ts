@@ -29,6 +29,9 @@ export class FetchProductsService {
 
     const [products, total] = await this.prisma.$transaction([
       this.prisma.product.findMany({
+        where: {
+          is_active: true,
+        },
         skip,
         take: PAGE_SIZE,
         include: {

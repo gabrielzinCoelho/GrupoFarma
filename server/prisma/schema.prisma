@@ -50,6 +50,7 @@ model Product {
   side_effects String
   category     Category @relation(fields: [category_id], references: [id])
   category_id  String
+  is_active    Boolean  @default(true)
 
   saleProducts Sale_Products[]
 

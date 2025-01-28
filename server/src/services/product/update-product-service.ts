@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient, Product } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
+import { CheckIfProductIsActiveService } from './check-if-product-is-active-service'
 
 interface UpdateProductServiceParams {
   id: string
@@ -9,6 +10,7 @@ interface UpdateProductServiceParams {
   howToUse: string
   sideEffects: string
   categoryId: string
+  isActive?: boolean
 }
 
 interface UpdateProductServiceResponse {
@@ -22,6 +24,7 @@ export class UpdateProductService {
       never,
       DefaultArgs
     >,
+    private checkProductService: CheckIfProductIsActiveService,
   ) {}
 
   async execute({
@@ -32,7 +35,12 @@ export class UpdateProductService {
     howToUse,
     sideEffects,
     categoryId,
+    isActive = true,
   }: UpdateProductServiceParams): Promise<UpdateProductServiceResponse> {
+    this.checkProductService.execute({
+      id,
+    })
+
     const product = await this.prisma.product.update({
       where: {
         id,
@@ -44,6 +52,7 @@ export class UpdateProductService {
         how_to_use: howToUse,
         side_effects: sideEffects,
         category_id: categoryId,
+        is_active: isActive,
       },
     })
 
