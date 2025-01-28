@@ -37,7 +37,7 @@ export class UpdateProductService {
     categoryId,
     isActive = true,
   }: UpdateProductServiceParams): Promise<UpdateProductServiceResponse> {
-    this.checkProductService.execute({
+    await this.checkProductService.execute({
       id,
     })
 

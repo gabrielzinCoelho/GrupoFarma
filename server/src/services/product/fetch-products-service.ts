@@ -3,6 +3,7 @@ import { DefaultArgs } from '@prisma/client/runtime/library'
 
 interface FetchProductsServiceParams {
   page: number
+  onlyActives: boolean
 }
 
 interface FetchProductsServiceResponse {
@@ -23,22 +24,27 @@ export class FetchProductsService {
 
   async execute({
     page,
+    onlyActives,
   }: FetchProductsServiceParams): Promise<FetchProductsServiceResponse> {
     const PAGE_SIZE = 10
     const skip = (page - 1) * PAGE_SIZE
 
+    const whereCondition = onlyActives ? { is_active: true } : {}
+
+    console.log(onlyActives, whereCondition)
+
     const [products, total] = await this.prisma.$transaction([
       this.prisma.product.findMany({
-        where: {
-          is_active: true,
-        },
+        where: whereCondition,
         skip,
         take: PAGE_SIZE,
         include: {
           category: true,
         },
       }),
-      this.prisma.product.count(),
+      this.prisma.product.count({
+        where: whereCondition,
+      }),
     ])
 
     return { products, total }

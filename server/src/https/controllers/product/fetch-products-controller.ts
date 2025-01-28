@@ -6,14 +6,16 @@ import { z } from 'zod'
 export const fetchProducts = async (req: FastifyRequest, res: FastifyReply) => {
   const fetchProducstParamsSchema = z.object({
     page: z.coerce.number().int().min(1),
+    onlyActives: z.enum(['true', 'false']).default('true'),
   })
 
-  const { page } = fetchProducstParamsSchema.parse(req.query)
+  const { page, onlyActives } = fetchProducstParamsSchema.parse(req.query)
 
   const fetchProductService = new FetchProductsService(prisma)
 
   const { products, total } = await fetchProductService.execute({
     page,
+    onlyActives: onlyActives === 'true',
   })
 
   return res.status(200).send({

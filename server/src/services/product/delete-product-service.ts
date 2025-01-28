@@ -30,7 +30,7 @@ export class DeleteProductService {
     })
 
     if (checkProduct._count.saleProducts !== 0) {
-      this.updateProductService.execute({
+      const { product } = await this.updateProductService.execute({
         id: checkProduct.id,
         anvisaCode: checkProduct.anvisa_code,
         name: checkProduct.name,
@@ -40,6 +40,8 @@ export class DeleteProductService {
         categoryId: checkProduct.category_id,
         isActive: false,
       })
+
+      return { product }
     }
 
     const product = await this.prisma.product.delete({

@@ -13,7 +13,10 @@ export const deleteProduct = async (req: FastifyRequest, res: FastifyReply) => {
   const { id } = deleteProductParamsSchema.parse(req.params)
 
   const checkProductService = new CheckIfProductIsActiveService(prisma)
-  const updateProductService = new UpdateProductService(prisma)
+  const updateProductService = new UpdateProductService(
+    prisma,
+    checkProductService,
+  )
   const deleteProductService = new DeleteProductService(
     prisma,
     checkProductService,
