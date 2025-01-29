@@ -36,8 +36,8 @@ export function Router() {
         {/* Produtos */}
         <Route path='products'>
           <Route index element={<ListarProdutos />} />
-          <Route path='new' element={<CriarProduto />} />
-          <Route path='view' element={<ListarProdutoDetalhado />} />
+          <Route path='new-product' element={<CriarProduto />} />
+          <Route path=':id' element={<ListarProdutoDetalhado />} />
         </Route>
 
         {/* Categorias */}

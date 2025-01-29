@@ -31,8 +31,6 @@ export class FetchProductsService {
 
     const whereCondition = onlyActives ? { is_active: true } : {}
 
-    console.log(onlyActives, whereCondition)
-
     const [products, total] = await this.prisma.$transaction([
       this.prisma.product.findMany({
         where: whereCondition,
