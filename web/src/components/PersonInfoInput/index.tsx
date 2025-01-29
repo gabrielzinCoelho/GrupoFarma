@@ -16,9 +16,15 @@ export function PersonInfoInput({label, profilePic, personName, email} : PersonI
         <img src={profilePic}></img>
         <InsideBoxText>
             <div className="formSelect">
-            <FormSelect label={""} placeholder={personName} options={[]} value={""} onChange={function (newValue: string): void {
+            <FormSelect 
+              label={""} 
+              placeholder={personName} 
+              options={[]} 
+              value={""} 
+              onChange={function (newValue: string): void {
                 throw new Error("Function not implemented.");
-            } } ></FormSelect>
+              } } 
+            />
             </div>
             <h2>{personName}</h2>
             <h2>{email}</h2>

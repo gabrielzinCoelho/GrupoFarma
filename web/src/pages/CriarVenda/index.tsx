@@ -19,8 +19,8 @@ export function CriarVenda() {
             description="Registre uma venda."
           />
           <MultipleInputContainer>
-            <PersonInfoInput label="Vendedor" profilePic={profilePic} personName="Gabriel Coelho Costa" email="gabriel.costa18@estudante.ufla.br"></PersonInfoInput> 
-            <PersonInfoInput label="Cliente" profilePic={profilePic} personName="Isac Gonçalves Cunha" email="isacgoncalves@gmail.com"></PersonInfoInput>  
+            <PersonInfoInput label="Vendedor" profilePic={profilePic} personName="Gabriel Coelho Costa" email="gabriel.costa18@estudante.ufla.br" /> 
+            <PersonInfoInput label="Cliente" profilePic={profilePic} personName="Isac Gonçalves Cunha" email="isacgoncalves@gmail.com" />  
           </MultipleInputContainer>
         <div className="newProduct">
           <PrimaryButtonWithIcon label="Adicionar Produto" Icon={Plus}></PrimaryButtonWithIcon>
