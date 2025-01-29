@@ -6,6 +6,8 @@ import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
 import { VerifyAuthAndRedirect } from "./VerifyAuthAndRedirect";
 import { ListarProdutos } from "../pages/ListarProdutos";
 import { EditarProduto } from "../pages/EditarProduto";
+import { CriarVenda } from "../pages/CriarVenda";
+import { ListarVendas } from "../pages/ListarVendas";
 
 export function Router() {
 
@@ -56,8 +58,8 @@ export function Router() {
 
         {/* Vendas */}
         <Route path='sales'>
-          <Route index element={<h1>View Sales</h1>} />
-          <Route path='new' element={<h1>New Sale</h1>} />
+          <Route index element={<ListarVendas/>} />
+          <Route path='new' element={<CriarVenda/>} />
         </Route>
 
       </Route>
