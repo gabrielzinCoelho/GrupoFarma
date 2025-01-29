@@ -37,7 +37,7 @@ export function SalesViewReducer(state: SalesViewState, action: any) {
 
     case SaleViewActionTypes.NEW_SALES_VIEW: {
 
-      const {sales, salesAmount, page} = action.payload
+      const { sales, salesAmount, page } = action.payload
 
       const firstIndexResult = (page - 1) * state.pageSize + 1
 
@@ -50,6 +50,24 @@ export function SalesViewReducer(state: SalesViewState, action: any) {
         lastIndexResult: firstIndexResult + sales.length - 1,
         salesAmount,
       } as SalesViewState
+    }
+
+    case SaleViewActionTypes.REMOVE_SALE: {
+
+      const { saleId: saleToRemove } = action.payload
+
+      const sales = state.sales.filter(sale => sale.id != saleToRemove)
+
+      if (sales.length === state.sales.length)
+        return state
+
+      return {
+        ...state,
+        sales,
+        lastIndexResult: state.firstIndexResult + sales.length - 1,
+        productsAmount: state.salesAmount - 1,
+      } as SalesViewState
+
     }
 
     default:

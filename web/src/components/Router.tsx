@@ -47,19 +47,19 @@ export function Router() {
         {/* Categorias */}
         <Route path='categories'>
           <Route index element={<h1>View Categories</h1>} />
-          <Route path='new' element={<h1>New Category</h1>} />
+          <Route path='new-category' element={<h1>New Category</h1>} />
         </Route>
 
         {/* Clientes */}
         <Route path='clients'>
           <Route index element={<h1>View Clients</h1>} />
-          <Route path='new' element={<h1>New Client</h1>} />
+          <Route path='new-client' element={<h1>New Client</h1>} />
         </Route>
 
         {/* Vendas */}
         <Route path='sales'>
           <Route index element={<ListarVendas/>} />
-          <Route path='new' element={<CriarVenda/>} />
+          <Route path='new-sale' element={<CriarVenda/>} />
         </Route>
 
       </Route>
