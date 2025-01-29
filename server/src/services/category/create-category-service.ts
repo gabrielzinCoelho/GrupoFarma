@@ -2,7 +2,7 @@ import { PrismaClient, Prisma, Category } from '@prisma/client'
 import { DefaultArgs } from '@prisma/client/runtime/library'
 
 interface CreateCategoryServiceParams {
-  id: number
+  id: string
   name: string
 }
 
@@ -25,7 +25,7 @@ export class CreateCategoryService {
   }: CreateCategoryServiceParams): Promise<CreateCategoryServiceResponse> {
     const category = await this.prisma.category.create({
       data: {
-        id: id,
+        id,
         name: name,
       },
     })

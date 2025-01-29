@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export const createCategory = async (req: FastifyRequest, res: FastifyReply) => {
   const createCategoryBodySchema = z.object({
-    id: z.number(),
+    id: z.string(),
     name: z.string(),
   })
 
