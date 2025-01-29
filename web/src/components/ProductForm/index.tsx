@@ -13,7 +13,7 @@ import { useAppSelector } from "../../store";
 import { api } from "../../lib/axios";
 import { useState, useEffect } from "react";
 
-const NewProductFormSchema = z.object({
+const ProductFormSchema = z.object({
   anvisaCode: z.string().min(1),
   name: z.string().min(1),
   category: z.string().min(1),
@@ -24,7 +24,7 @@ const NewProductFormSchema = z.object({
 
 // const priceSchema = z.number().multipleOf(0.01)
 
-export type ProductFormInputs = z.infer<typeof NewProductFormSchema>
+export type ProductFormInputs = z.infer<typeof ProductFormSchema>
 
 interface Button {
   label: string
@@ -50,11 +50,12 @@ interface Category {
 export function ProductForm({cancelButton, successButton, initialState} : ProductFormProps) {
 
   const {
+    reset,
     handleSubmit,
     control,
     formState: { isSubmitting },
   } = useForm<ProductFormInputs>({
-    resolver: zodResolver(NewProductFormSchema)
+    resolver: zodResolver(ProductFormSchema)
   })
 
   const {token : userToken} = useAppSelector(store => store.auth)
@@ -92,6 +93,10 @@ export function ProductForm({cancelButton, successButton, initialState} : Produc
 
     initializeCategories()
   }, [userToken])
+
+  useEffect(() => {
+    reset(initialState)
+  }, [initialState, reset])
 
   return (
     <PageFormContainer>

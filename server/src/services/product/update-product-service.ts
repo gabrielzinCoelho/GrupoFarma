@@ -9,7 +9,7 @@ interface UpdateProductServiceParams {
   price: number
   howToUse: string
   sideEffects: string
-  categoryId: string
+  category: string
   isActive?: boolean
 }
 
@@ -34,7 +34,7 @@ export class UpdateProductService {
     price,
     howToUse,
     sideEffects,
-    categoryId,
+    category,
     isActive = true,
   }: UpdateProductServiceParams): Promise<UpdateProductServiceResponse> {
     await this.checkProductService.execute({
@@ -51,7 +51,7 @@ export class UpdateProductService {
         price,
         how_to_use: howToUse,
         side_effects: sideEffects,
-        category_id: categoryId,
+        category_id: category,
         is_active: isActive,
       },
     })

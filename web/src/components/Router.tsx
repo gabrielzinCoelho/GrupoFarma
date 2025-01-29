@@ -5,6 +5,7 @@ import { CriarProduto } from "../pages/CriarProduto";
 import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
 import { VerifyAuthAndRedirect } from "./VerifyAuthAndRedirect";
 import { ListarProdutos } from "../pages/ListarProdutos";
+import { EditarProduto } from "../pages/EditarProduto";
 
 export function Router() {
 
@@ -37,7 +38,7 @@ export function Router() {
         <Route path='products'>
           <Route index element={<ListarProdutos />} />
           <Route path='new-product' element={<CriarProduto />} />
-          <Route path='edit/:id' element={<h1>Editar Produto</h1>} />
+          <Route path='edit/:id' element={<EditarProduto />} />
           <Route path=':id' element={<ListarProdutoDetalhado />} />
         </Route>
 

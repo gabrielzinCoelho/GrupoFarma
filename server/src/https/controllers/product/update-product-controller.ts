@@ -11,14 +11,14 @@ export const updateProduct = async (req: FastifyRequest, res: FastifyReply) => {
     price: z.number().multipleOf(0.01),
     howToUse: z.string(),
     sideEffects: z.string(),
-    categoryId: z.string(),
+    category: z.string(),
   })
 
   const updateProducParamsSchema = z.object({
     id: z.string().uuid(),
   })
 
-  const { anvisaCode, name, price, howToUse, sideEffects, categoryId } =
+  const { anvisaCode, name, price, howToUse, sideEffects, category } =
     updateProductBodySchema.parse(req.body)
 
   const { id } = updateProducParamsSchema.parse(req.params)
@@ -36,7 +36,7 @@ export const updateProduct = async (req: FastifyRequest, res: FastifyReply) => {
     price,
     howToUse,
     sideEffects,
-    categoryId,
+    category,
   })
 
   return res.status(200).send({
