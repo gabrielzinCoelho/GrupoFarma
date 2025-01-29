@@ -37,6 +37,7 @@ export function Router() {
         <Route path='products'>
           <Route index element={<ListarProdutos />} />
           <Route path='new-product' element={<CriarProduto />} />
+          <Route path='edit/:id' element={<h1>Editar Produto</h1>} />
           <Route path=':id' element={<ListarProdutoDetalhado />} />
         </Route>
 

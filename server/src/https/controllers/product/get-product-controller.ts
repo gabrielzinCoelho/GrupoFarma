@@ -19,6 +19,9 @@ export const getProduct = async (req: FastifyRequest, res: FastifyReply) => {
   })
 
   return res.status(200).send({
-    product,
+    product: {
+      ...product,
+      price: product.price.toNumber(),
+    },
   })
 }

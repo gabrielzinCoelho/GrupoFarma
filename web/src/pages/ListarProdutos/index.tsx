@@ -71,19 +71,21 @@ export function ListarProdutos() {
     } as ProductsViewState
   )
 
-  async function updateProductsViewState(page : number){
+  const updateProductsViewState = useCallback(
+    async (page : number) => {
 
-    const {products, productsAmount} = await fetchProducts(page)
-    dispatch(
-      newProductsViewAction(products, productsAmount, page)
-    )
-  }
+      const {products, productsAmount} = await fetchProducts(page)
+      dispatch(
+        newProductsViewAction(products, productsAmount, page)
+      )
+    }
+  , [fetchProducts])
 
   useEffect(() => {
 
     updateProductsViewState(1)
 
-  }, [fetchProducts,])
+  }, [updateProductsViewState])
 
   const handleProductRemoval = async (product : string) => {
    
@@ -112,8 +114,6 @@ export function ListarProdutos() {
       dispatch(
         removeProductAction(product)
       )
-
-
   }
 
   return (

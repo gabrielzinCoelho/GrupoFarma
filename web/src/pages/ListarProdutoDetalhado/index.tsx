@@ -5,11 +5,70 @@ import iconCriar from '../../assets/icon-criar.png'
 import iconRemover from '../../assets/icon-remover.png'
 import { InfoBox } from "../../components/InfoBox";
 import { ShortText } from "./components/ShortText";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { api } from "../../lib/axios";
+import { useAppSelector } from "../../store";
+import { priceFormatter } from "../../utils/formatters";
+
+interface Product {
+  name: string
+  id: string
+  anvisa_code: string
+  price: number
+  how_to_use: string
+  side_effects: string
+  category_id: string,
+  category: {
+    id: string,
+    name: string
+  }
+}
 
 export function ListarProdutoDetalhado() {
 
   const navigate = useNavigate()
+  const { id: productId } = useParams()
+  const { token: userToken } = useAppSelector(store => store.auth)
+
+  const [product, setProduct] = useState<Product>()
+
+  useEffect(() => {
+
+    async function initializeProduct() {
+
+      const productResponse = await api.get(`/products/${productId}`, {
+        headers: {
+          Authorization: `Bearer ${userToken}`
+        }
+      })
+      if (productResponse.status !== 200)
+        throw new Error('Product Fetch Failed.')
+
+      setProduct(productResponse.data.product)
+    }
+
+    initializeProduct()
+
+  }, [productId, userToken])
+
+  const handleDeleteProduct = async () => {
+
+    if(!product)
+      return
+
+    const productRemoved = await api.delete(`products/${product.id}`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    })
+
+    if (productRemoved.status !== 200)
+      throw new Error('Product Removal Failed.')
+
+    navigate('/products')
+
+  }
 
   return (
     <ContentContainer>
@@ -24,30 +83,30 @@ export function ListarProdutoDetalhado() {
             titles={[
               "Produtos",
               "Lista de Produtos",
-              "Antibiótico",
+              ...(product ? [product.name] : []),
             ]}
             description="Gerencie um produto."
           />
           <InfoContainer>
             <MultipleInputContainer>
               <InfoBox label="Produto" >
-                <ShortText title="Código" text="1234"></ShortText>
-                <ShortText title="Nome" text="Antibiótico"></ShortText>
+                <ShortText title="Código" text={product?.anvisa_code} />
+                <ShortText title="Nome" text={product?.name} />
               </InfoBox>
               <InfoBox label="Venda" >
-                <ShortText title="Valor" text="R$ 298,00"></ShortText>
-                <ShortText title="Categoria" text="Anti-inflamatório"></ShortText>
+                <ShortText title="Valor" text={product && priceFormatter.format(product.price)} />
+                <ShortText title="Categoria" text={product?.category.name} />
               </InfoBox>
             </MultipleInputContainer>
             <InfoBoxContainer>
               <InfoBox label="Como usar" >
                 <InfoBoxContent>
-                  <span>Morbi a metus. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Nullam sapien sem, ornare ac, nonummy non, lobortis a, enim. Nunc tincidunt ante vitae massa. Duis ante orci, molestie vitae, vehicula venenatis, tincidunt ac, pede. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. Etiam commodo dui eget wisi. Donec iaculis gravida nulla. Donec quis nibh at felis congue commodo. Etiam bibendum elit eget erat. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin et, dolor. Pellentesque habitant morbi tristique</span>
+                  <span>{product?.how_to_use}</span>
                 </InfoBoxContent>
               </InfoBox>
               <InfoBox label="Efeitos Colaterais e contraindicações">
                 <InfoBoxContent>
-                  <span>Morbi a metus. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Morbi a metus. Phasellus enim erat, vestibulum vel, aliquam a, posuere eu, velit. Nullam sapien sem, ornare ac, nonummy non, lobortis a, enim. Nunc tincidunt ante vitae massa. Duis ante orci, molestie vitae, vehicula venenatis, tincidunt ac, pede. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. Etiam commodo dui eget wisi. Donec iaculis gravida nulla. Donec quis nibh at felis congue commodo. Etiam bibendum elit eget erat. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin et, dolor. Pellentesque habitant morbi tristique Nullam sapien sem, ornare ac, nonummy non, lobortis a, enim. Nunc tincidunt ante vitae massa. Duis ante orci, molestie vitae, vehicula venenatis, tincidunt ac, pede. Nulla accumsan, elit sit amet varius semper, nulla mauris mollis quam, tempor suscipit diam nulla vel leo. Etiam commodo dui eget wisi. Donec iaculis gravida nulla. Donec quis nibh at felis congue commodo. Etiam bibendum elit eget erat. In sem justo, commodo ut, suscipit at, pharetra vitae, orci. Duis sapien nunc, commodo et, interdum suscipit, sollicitudin et, dolor. Pellentesque habitant morbi tristique</span>
+                  <span>{product?.side_effects}</span>
                 </InfoBoxContent>
               </InfoBox>
             </InfoBoxContainer>
@@ -60,6 +119,7 @@ export function ListarProdutoDetalhado() {
             color="red-500"
             widthInRem={11}
             iconWidthInPx={12}
+            onClick={handleDeleteProduct}
           />
           <SecondaryButton
             label="Editar Produto"
@@ -67,6 +127,7 @@ export function ListarProdutoDetalhado() {
             icon={iconCriar}
             widthInRem={10}
             iconWidthInPx={16}
+            onClick={() => (product && navigate(`/products/edit/${product.id}`))}
           />
         </ButtonContainer>
       </PageContainer>
