@@ -10,10 +10,10 @@ export const createProduct = async (req: FastifyRequest, res: FastifyReply) => {
     price: z.number().multipleOf(0.01),
     howToUse: z.string(),
     sideEffects: z.string(),
-    categoryId: z.string(),
+    category: z.string(),
   })
 
-  const { anvisaCode, name, price, howToUse, sideEffects, categoryId } =
+  const { anvisaCode, name, price, howToUse, sideEffects, category } =
     createProductBodySchema.parse(req.body)
 
   const createProductService = new CreateProductService(prisma)
@@ -24,7 +24,7 @@ export const createProduct = async (req: FastifyRequest, res: FastifyReply) => {
     price,
     howToUse,
     sideEffects,
-    categoryId,
+    category,
   })
 
   return res.status(201).send({

@@ -6,7 +6,10 @@ interface InputProps {
   label: string
   placeholder: string
   required?: boolean
-  options: string[]
+  options: {
+    label: string
+    value: string
+  }[]
   CheckedIcon?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>
   value: string,
   onChange: (newValue : string) => void
@@ -31,8 +34,8 @@ export function FormSelect({ label, placeholder, options, value, onChange, Check
             <SelectViewport>
               {
                 options.map(option => (
-                  <SelectItem value={option} key={option}>
-                    <Select.ItemText>{option}</Select.ItemText>
+                  <SelectItem value={option.value} key={option.value}>
+                    <Select.ItemText>{option.label}</Select.ItemText>
                     {
                       CheckedIcon &&
                       (

@@ -68,7 +68,7 @@ export const MultipleInputContainer = styled.div`
   gap:8rem;
   flex-direction: row;
   justify-content: space-between;
-  height: 8rem;
+  height: max-content;
 `;
 
 

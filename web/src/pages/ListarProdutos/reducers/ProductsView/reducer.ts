@@ -50,6 +50,24 @@ export function ProductsViewReducer(state: ProductsViewState, action: any) {
       } as ProductsViewState
     }
 
+    case ProductViewActionTypes.REMOVE_PRODUCT: {
+
+      const {productId : productToRemove} = action.payload
+
+      const products = state.products.filter(product => product.id != productToRemove)
+
+      if(products.length === state.products.length)
+        return state
+
+      return {
+        ...state,
+        products,
+        lastIndexResult: state.firstIndexResult + products.length - 1,
+        productsAmount: state.productsAmount - 1,
+      } as ProductsViewState
+
+    }
+
     default:
       return state
 

@@ -7,7 +7,7 @@ interface CreateProductServiceParams {
   price: number
   howToUse: string
   sideEffects: string
-  categoryId: string
+  category: string
 }
 
 interface CreateProductServiceResponse {
@@ -29,7 +29,7 @@ export class CreateProductService {
     price,
     howToUse,
     sideEffects,
-    categoryId,
+    category,
   }: CreateProductServiceParams): Promise<CreateProductServiceResponse> {
     const product = await this.prisma.product.create({
       data: {
@@ -38,7 +38,7 @@ export class CreateProductService {
         price,
         how_to_use: howToUse,
         side_effects: sideEffects,
-        category_id: categoryId,
+        category_id: category,
       },
     })
 

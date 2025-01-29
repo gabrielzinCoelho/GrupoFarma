@@ -8,7 +8,8 @@ interface ButtonProps {
 
 export const Button = styled.button<ButtonProps>`
 
-  width: ${ props => props.$widthInRem === undefined ? '100%' : `${props.$widthInRem}rem`};
+  /* width: ${ props => props.$widthInRem === undefined ? '100%' : `${props.$widthInRem}rem`}; */
+  width: max-content;
   height: 50px;
   background: ${props => props.theme["slate-50"]};
   font-weight: 500;

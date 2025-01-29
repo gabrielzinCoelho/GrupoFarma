@@ -10,7 +10,7 @@ import { useCallback, useEffect, useReducer } from "react";
 import { api } from "../../lib/axios";
 import { useAppSelector } from "../../store";
 import { ProductsViewReducer, ProductsViewState } from "./reducers/ProductsView/reducer";
-import { newProductsViewAction } from "./reducers/ProductsView/actions";
+import { newProductsViewAction, removeProductAction } from "./reducers/ProductsView/actions";
 
 const PAGE_SIZE = 10
 
@@ -71,26 +71,48 @@ export function ListarProdutos() {
     } as ProductsViewState
   )
 
-  useEffect(() => {
+  const updateProductsViewState = useCallback(
+    async (page : number) => {
 
-    async function initializeProductsViewState(){
-
-      const initialPage = 1
-
-      const {products, productsAmount} = await fetchProducts(initialPage)
-      dispatch(
-        newProductsViewAction(products, productsAmount, initialPage)
-      )
-    }
-
-    initializeProductsViewState()
-
-  }, [fetchProducts])
-
-  const handleChangePage = async (page: number) => {
-    const {products, productsAmount} = await fetchProducts(page)
+      const {products, productsAmount} = await fetchProducts(page)
       dispatch(
         newProductsViewAction(products, productsAmount, page)
+      )
+    }
+  , [fetchProducts])
+
+  useEffect(() => {
+
+    updateProductsViewState(1)
+
+  }, [updateProductsViewState])
+
+  const handleProductRemoval = async (product : string) => {
+   
+    const productRemoved = await api.delete(`products/${product}`, {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
+    })
+
+    if(productRemoved.status !== 200)
+      throw new Error('Product Removal Failed.')
+    
+    if(productsViewState.products.length === 1){
+
+      let nextPage = productsViewState.currentPage < productsViewState.pagesAmount ?
+        productsViewState.currentPage :
+        productsViewState.currentPage - 1
+      
+      if(nextPage < 1)
+          nextPage = 1
+
+      updateProductsViewState(nextPage)
+        
+    }
+    else
+      dispatch(
+        removeProductAction(product)
       )
   }
 
@@ -108,7 +130,7 @@ export function ListarProdutos() {
         <PrimaryButtonWithIcon 
           label="Novo Produto"
           Icon={Plus}
-          onClick={() => navigate('/products/new')}
+          onClick={() => navigate('/products/new-product')}
         />
       </PageHeaderContainer>
       <PageContentContainer>
@@ -121,8 +143,8 @@ export function ListarProdutos() {
               firstIndex: productsViewState.firstIndexResult,
               lastIndex: productsViewState.lastIndexResult,
               pagesAmount: productsViewState.pagesAmount,
-              handleNextPage: () => handleChangePage(productsViewState.currentPage + 1),
-              handlePreviousPage: () => handleChangePage(productsViewState.currentPage - 1)
+              handleNextPage: () => updateProductsViewState(productsViewState.currentPage + 1),
+              handlePreviousPage: () => updateProductsViewState(productsViewState.currentPage - 1)
             }}
             columns={[
               {
@@ -165,7 +187,7 @@ export function ListarProdutos() {
                       },
                       {
                         value: '',
-                        element: <ColumnActions onRemove={() => {}} showMore={() => navigate('/products/view')} />
+                        element: <ColumnActions onRemove={() => (handleProductRemoval(product.id))} showMore={() => navigate(`/products/${product.id}`)} />
                       }
                     ]
                   )
