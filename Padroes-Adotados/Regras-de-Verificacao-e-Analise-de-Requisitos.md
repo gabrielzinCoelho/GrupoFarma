@@ -22,6 +22,6 @@ I.e. RNF-001.
 
 1. Defina somente um requesito por vez: cada requisito será descrito de forma independente em um único item.
 
-1. Evitar palavras ambíguas: será evitado o uso de palavras que possam gerar ambiguidade, como "amigável", "frequentemente", "possivelmente", "aproximadamente", "talvez", entre outras...
+1. Evitar as palavras e experessões: "E", "ou", "somente se", "exceto", "se necessário", "mas", "contudo", "entretanto", "usualmente", "geralmente", "frequentemente", "tipicamente", "amigável", "versátil", "flexível", "aproximadamente", "tão logo quanto possível", "rapidamente", "talvez", "provável" e outras palavras similares. Pois são subjetivas e podem gerar ambiguidade. 
 
 1. Utilize um vocabulário fechado: será utilizado um único termo para se referir a uma mesma entidade.
