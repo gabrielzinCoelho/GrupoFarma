@@ -2,15 +2,23 @@ import { ProductTableColumnContainer, ProductImageContainer } from "./styles";
 import defaultProductImage from '../../../../assets/default-product.jpeg'
 import { XCircle } from "phosphor-react";
 
-export function ProductTableColumn(){
+interface ProductTableColumnProps {
+  productId: string,
+  productName: string,
+  handleProductRemoval: (productId : string) => void
+}
+
+export function ProductTableColumn({productName, productId, handleProductRemoval} : ProductTableColumnProps){
 
   return (
     <ProductTableColumnContainer>
       <ProductImageContainer>
-        <XCircle />
+        <XCircle
+          onClick={() => handleProductRemoval(productId)}
+        />
         <img src={defaultProductImage} />
       </ProductImageContainer>
-      <span>Pasta de Dente Colgate 500g</span>
+      <span>{productName}</span>
     </ProductTableColumnContainer>
 )
 

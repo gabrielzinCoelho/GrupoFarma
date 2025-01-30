@@ -6,23 +6,47 @@ import { SaleInfo } from "./components/SaleInfo";
 import { ButtonSubmitContainer, CouponButtonContainer, CouponContainer, DeliveryFeeContainer, DeliveryFeeDataContainer, DeliveryFeeRadioContainer, PaymentContainer, PaymentInfoContainer, PaymentMethodContainer, ProductsInfoContainer, SaleInfoContainer } from "./styles";
 import { SecondaryButtonFlex } from "../../../../components/SecondaryButtonFlex";
 import { PlusCircle } from "phosphor-react";
+import { FormControl, FormReset, PaymentMethod } from "../..";
+import { Controller } from "react-hook-form";
+import { useContext } from "react";
+import { SaleProductsContext } from "../../contexts/SaleProducts/context";
+import { priceFormatter } from "../../../../utils/formatters";
 
+interface PaymentSaleDialogProps {
+  control: FormControl,
+  reset: FormReset,
+  paymentMethods: PaymentMethod[]
+  deliveryFee: number
+  handleUpdateDeliveryFee: (newValue: number) => void
+  hasDeliveryFee: boolean
+  handleUpdateHasDeliveryFee: (newValue: boolean) => void
+  handleFinishSale: (e?: React.BaseSyntheticEvent) => Promise<void>
+}
 
-export function PaymentSaleDialog() {
+export function PaymentSaleDialog({ control, paymentMethods, deliveryFee, handleUpdateDeliveryFee, handleUpdateHasDeliveryFee, hasDeliveryFee, handleFinishSale }: PaymentSaleDialogProps) {
+
+  const { shopCartProducts } = useContext(SaleProductsContext)
+
+  const subtotal = shopCartProducts.reduce((acc, product) => {
+    return acc + product.price * product.amount
+  }, 0)
 
   return (
     <PaymentContainer>
 
       <ProductsInfoContainer>
-        <ProductInfo />
-        <ProductInfo />
+        {
+          shopCartProducts.map(product => (
+            <ProductInfo name={product.name} amount={product.amount} price={product.price} />
+          ))
+        }
       </ProductsInfoContainer>
 
       <SaleInfoContainer>
-        <SaleInfo label="Subtotal" value="R$ 102,67" />
-        <SaleInfo label="Taxa de Entrega" value="R$ 102,67" />
-        <SaleInfo label="Desconto" value="R$ 102,67" />
-        <SaleInfo label="Total" value="R$ 102,67" />
+        <SaleInfo label="Subtotal" value={priceFormatter.format(subtotal)} />
+        <SaleInfo label="Taxa de Entrega" value={priceFormatter.format(deliveryFee)} />
+        <SaleInfo label="Desconto" value="R$ 0, 00" />
+        <SaleInfo label="Total" value={priceFormatter.format(subtotal + deliveryFee)} />
       </SaleInfoContainer>
 
       <PaymentInfoContainer>
@@ -41,36 +65,43 @@ export function PaymentSaleDialog() {
                     value: 'no'
                   }
                 ]}
+                value={hasDeliveryFee ? 'yes' : 'no'}
+                onChange={(newValue: string) => {
+                  handleUpdateHasDeliveryFee(newValue === 'yes')
+                  handleUpdateDeliveryFee(0)
+                }}
               />
             </DeliveryFeeRadioContainer>
             <InputText
-              disabled
+              disabled={!hasDeliveryFee}
               widthInRem={12}
-              value='R$ 0, 00'
+              value={deliveryFee.toString()}
+              onChange={(newValue: string) => {
+                handleUpdateDeliveryFee(Number(newValue))
+              }}
               placeholder="Taxa de Entrega"
             />
           </DeliveryFeeDataContainer>
         </DeliveryFeeContainer>
         <PaymentMethodContainer>
-          <InputRadioGroup
-            options={[
-              {
-                label: 'Cartão de Débito',
-                value: 'debit-card'
-              },
-              {
-                label: 'Cartão de Crédito',
-                value: 'credit-card'
-              },
-              {
-                label: 'Dinheiro',
-                value: 'cash'
-              },
-              {
-                label: 'PIX',
-                value: 'pix'
-              }
-            ]}
+          <Controller
+            control={control}
+            name='paymentMethod'
+            render={({ field }) => (
+              <InputRadioGroup
+                options={
+                  paymentMethods.map(paymentMethod => ({
+                    label: paymentMethod.name,
+                    value: paymentMethod.id
+                  }))
+                }
+                value={field.value?.id}
+                onChange={(newValue : string) => {
+                  const newPaymentMethod = paymentMethods.find(paymentMethod => paymentMethod.id === newValue)
+                  field.onChange(newPaymentMethod!)
+                }}
+              />
+            )}
           />
         </PaymentMethodContainer>
         <CouponContainer>
@@ -79,6 +110,7 @@ export function PaymentSaleDialog() {
             widthInRem={18}
             value=''
             placeholder="Código do Cupom"
+            onChange={() => { }}
           />
           <CouponButtonContainer>
             <SecondaryButtonFlex
@@ -93,7 +125,7 @@ export function PaymentSaleDialog() {
       <ButtonSubmitContainer>
         <PrimaryButton
           label="Confirmar Pagamento"
-          onClick={() => { }}
+          onClick={handleFinishSale}
           widthInRem={16}
         />
       </ButtonSubmitContainer>

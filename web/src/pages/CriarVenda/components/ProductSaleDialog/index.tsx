@@ -1,8 +1,15 @@
+import { useContext } from "react";
 import { FormSelect } from "../../../../components/FormSelect";
+import { SaleProductsContext } from "../../contexts/SaleProducts/context";
 import { ProductItemSaleDialog } from "./components/ProductItemSaleDialog";
 import { SaleContainer, ContainerFormSelect, SaleProductsDialogContainer } from "./styles";
 
 export function ProductsSaleDialog() {
+
+  const {
+      addProductToShopCart,
+      availableProducts,
+    } = useContext(SaleProductsContext)
 
   return (
     <SaleContainer>
@@ -15,13 +22,18 @@ export function ProductsSaleDialog() {
         />
       </ContainerFormSelect>
       <SaleProductsDialogContainer>
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
-        <ProductItemSaleDialog />
+        {
+          availableProducts.map(
+            product => (
+              <ProductItemSaleDialog
+                handleClick={addProductToShopCart}
+                productId={product.id}
+                productName={product.name}
+                productPrice={product.price}
+              />
+            )
+          )
+        }
       </SaleProductsDialogContainer>
     </SaleContainer>
   )

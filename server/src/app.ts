@@ -7,6 +7,8 @@ import cors from '@fastify/cors'
 import { productsRoutes } from './https/controllers/product/routes'
 import { salesRoutes } from './https/controllers/sale/routes'
 import { categoryRoutes } from './https/controllers/category/routes'
+import { clientRoutes } from './https/controllers/client/routes'
+import { paymentMethodRoutes } from './https/controllers/paymentMethod/routes'
 
 export const app = fastify()
 
@@ -29,6 +31,14 @@ app.register(salesRoutes, {
 })
 app.register(categoryRoutes, {
   prefix: 'categories',
+})
+
+app.register(clientRoutes, {
+  prefix: 'clients',
+})
+
+app.register(paymentMethodRoutes, {
+  prefix: 'payment-methods',
 })
 
 app.setErrorHandler((err, req, res) => {

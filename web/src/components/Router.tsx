@@ -8,6 +8,7 @@ import { ListarProdutos } from "../pages/ListarProdutos";
 import { EditarProduto } from "../pages/EditarProduto";
 import { CriarVenda } from "../pages/CriarVenda";
 import { ListarVendas } from "../pages/ListarVendas";
+import { SaleProductsContextProvider } from "../pages/CriarVenda/contexts/SaleProducts";
 
 export function Router() {
 
@@ -59,7 +60,11 @@ export function Router() {
         {/* Vendas */}
         <Route path='sales'>
           <Route index element={<ListarVendas/>} />
-          <Route path='new-sale' element={<CriarVenda/>} />
+          <Route path='new-sale' element={
+            <SaleProductsContextProvider>
+              <CriarVenda/>
+            </SaleProductsContextProvider>
+          } />
         </Route>
 
       </Route>
