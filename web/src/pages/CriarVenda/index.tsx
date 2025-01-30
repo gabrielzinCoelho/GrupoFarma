@@ -1,4 +1,4 @@
-import { ButtonContainer, MultipleInputContainer, PageContainer, ContentContainer, NewProductButtonContainer, SaleProductsContainer, SaleProductsTable, SaleSubtotalContainer, ContainerFormSelect, SaleContainer, SaleProductsDialogContainer } from "./styles";
+import { ButtonContainer, MultipleInputContainer, PageContainer, ContentContainer, NewProductButtonContainer, SaleProductsContainer, SaleProductsTable, SaleSubtotalContainer } from "./styles";
 import { SecondaryButton } from '../../components/SecondaryButton'
 import { PageTitle } from '../../components/PageTitle'
 import iconVenda from '../../assets/icon-venda.png'

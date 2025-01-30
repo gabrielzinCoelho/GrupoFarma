@@ -39,7 +39,7 @@ export const PaymentInfoContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.5rem;
 
 `
 
@@ -58,6 +58,7 @@ export const DeliveryFeeContainer = styled.div`
 
 export const DeliveryFeeDataContainer = styled.div`
 
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,41 +66,8 @@ export const DeliveryFeeDataContainer = styled.div`
 
 export const DeliveryFeeRadioContainer = styled.div`
 
-  display: flex;
-  gap: 2rem;
-
-`
-
-export const DeliveryFeeOption = styled.div`
-
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  label {
-    color: ${props => props.theme["slate-800"]};
-    font-size: 1rem;
-    font-weight: 400;
-  }
-
-  input {
-
-  }
-
-`
-
-export const DeliveryFeeInput = styled.input`
-
-  border: 0;
-    box-shadow: none;
-    outline: 0;
-
-    &:focus{
-      border: 0;
-      box-shadow: none;
-      outline: 0;
-    }
-
+  width: 14rem;
+  padding: 0 0.2rem;
 `
 
 export const ButtonSubmitContainer = styled.div`
@@ -107,5 +75,28 @@ export const ButtonSubmitContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+
+`
+
+export const PaymentMethodContainer = styled.div`
+
+  width: 100%;
+  padding: 0 0.2rem;
+
+`
+
+export const CouponContainer = styled.div`
+
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+
+`
+
+export const CouponButtonContainer = styled.div`
+
+  height: 100%;
+  width: 10rem;
 
 `

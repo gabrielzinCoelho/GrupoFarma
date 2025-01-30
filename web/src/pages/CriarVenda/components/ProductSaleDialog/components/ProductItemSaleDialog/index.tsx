@@ -1,5 +1,5 @@
 import { ProductDataContainer, ProductImageContainer, ProductItemSaleDialogContainer } from "./styles";
-import defaultProductImage from '../../../../assets/default-product.jpeg'
+import defaultProductImage from '../../../../../../assets/default-product.jpeg'
 
 export function ProductItemSaleDialog(){
 

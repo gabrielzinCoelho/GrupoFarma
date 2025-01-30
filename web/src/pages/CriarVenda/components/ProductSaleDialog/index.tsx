@@ -1,4 +1,5 @@
 import { FormSelect } from "../../../../components/FormSelect";
+import { ProductItemSaleDialog } from "./components/ProductItemSaleDialog";
 import { SaleContainer, ContainerFormSelect, SaleProductsDialogContainer } from "./styles";
 
 export function ProductsSaleDialog() {
@@ -7,20 +8,20 @@ export function ProductsSaleDialog() {
     <SaleContainer>
       <ContainerFormSelect>
         <FormSelect
-          onChange={(newValue: string) => { }}
+          onChange={(newValue: string) => {console.log(newValue)}}
           options={[]}
           placeholder='Todos os produtos'
           value=''
         />
       </ContainerFormSelect>
       <SaleProductsDialogContainer>
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
-        <ProductsSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
+        <ProductItemSaleDialog />
       </SaleProductsDialogContainer>
     </SaleContainer>
   )
