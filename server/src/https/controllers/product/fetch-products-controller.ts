@@ -5,7 +5,7 @@ import { z } from 'zod'
 
 export const fetchProducts = async (req: FastifyRequest, res: FastifyReply) => {
   const fetchProducstParamsSchema = z.object({
-    page: z.coerce.number().int().min(1),
+    page: z.coerce.number().int().min(1).optional(),
     onlyActives: z.enum(['true', 'false']).default('true'),
   })
 

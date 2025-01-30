@@ -123,9 +123,8 @@ export function ListarProdutos() {
           titles={[
             "Produtos",
             "Lista de Produtos",
-            "Antibiótico",
           ]}
-          description="Gerencie um produto."
+          description="Lista de Produtos Registrados."
         />
         <PrimaryButtonWithIcon 
           label="Novo Produto"

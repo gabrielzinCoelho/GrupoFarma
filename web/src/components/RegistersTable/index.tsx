@@ -37,9 +37,20 @@ interface RegistersTableProps {
   filters?: ReactNode
   pagination?: TablePagination
   numRows: number
+  borderBottomRadius?: boolean
+  rowHeightInRem?: number
+  
 }
 
-export function RegistersTable({registers, columns, filters, pagination, numRows} : RegistersTableProps){
+export function RegistersTable({
+  registers, 
+  columns, 
+  filters, 
+  pagination, 
+  numRows,
+  borderBottomRadius = true, 
+  rowHeightInRem = 3
+  } : RegistersTableProps){
 
   const [tableViewState, dispatch] = useReducer(
     TableViewReducer,
@@ -60,7 +71,9 @@ export function RegistersTable({registers, columns, filters, pagination, numRows
         filters &&
         filters
       }
-      <Table>
+      <Table
+        $borderBottomRadius={borderBottomRadius}
+      >
         <TableHeader>
           <tr>
             {
@@ -97,7 +110,10 @@ export function RegistersTable({registers, columns, filters, pagination, numRows
             }
           </tr>
         </TableHeader>
-        <TableBody $numRows={numRows}>
+        <TableBody 
+          $numRows={numRows}
+          $rowHeightInRem={rowHeightInRem}
+        >
           {
             tableViewState.tableRegisters && 
             tableViewState.tableRegisters.length > 0 &&

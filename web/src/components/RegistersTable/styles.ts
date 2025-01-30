@@ -8,13 +8,19 @@ export const TableContainer = styled.div`
   gap: 1rem;
 `
 
+interface TableProps {
+  $borderBottomRadius: boolean
+}
 
-export const Table = styled.table`
+export const Table = styled.table<TableProps>`
   flex: 1;
   width: 100%;
   border: 1px solid ${props => props.theme["slate-500"]};
   background: ${props => props.theme["slate-50"]};
-  border-radius: 8px;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-left-radius: ${props => props.$borderBottomRadius && '8px'};
+  border-bottom-right-radius: ${props => props.$borderBottomRadius && '8px'};
   border-collapse: collapse;
   display: flex;
   flex-direction: column;
@@ -68,15 +74,19 @@ export const TableHeaderItem = styled.th<TableHeaderItemProps>`
 
 interface TableBodyProps {
   $numRows: number
+  $rowHeightInRem: number
 }
 
 export const TableBody = styled.tbody<TableBodyProps>`
   width: 100%;
   overflow-y: auto;
-  height: ${props => `${props.$numRows * 3}rem`};
+  height: ${props => `${props.$numRows * props.$rowHeightInRem}rem`};
+
+  tr {
+    height: ${props => `${props.$rowHeightInRem}rem`}
+  }
+
 `
-
-
 
 export const PaginationContainer = styled.div`
   width: 100%;
@@ -85,9 +95,7 @@ export const PaginationContainer = styled.div`
   height: max-content;
 `
 
-
 export const TableRow = styled.tr`
-  height: 3rem;  
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -114,6 +122,7 @@ export const TableRowItem = styled.td<TableRowItemProps>`
   align-items: center;
   padding: 0.5rem 0;
   padding-right: 1rem;
+  box-sizing: border-box;
 
   &:first-child {
     padding-left: 2rem;

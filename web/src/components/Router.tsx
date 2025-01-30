@@ -6,6 +6,9 @@ import { ListarProdutoDetalhado } from "../pages/ListarProdutoDetalhado";
 import { VerifyAuthAndRedirect } from "./VerifyAuthAndRedirect";
 import { ListarProdutos } from "../pages/ListarProdutos";
 import { EditarProduto } from "../pages/EditarProduto";
+import { CriarVenda } from "../pages/CriarVenda";
+import { ListarVendas } from "../pages/ListarVendas";
+import { SaleProductsContextProvider } from "../pages/CriarVenda/contexts/SaleProducts";
 
 export function Router() {
 
@@ -45,19 +48,23 @@ export function Router() {
         {/* Categorias */}
         <Route path='categories'>
           <Route index element={<h1>View Categories</h1>} />
-          <Route path='new' element={<h1>New Category</h1>} />
+          <Route path='new-category' element={<h1>New Category</h1>} />
         </Route>
 
         {/* Clientes */}
         <Route path='clients'>
           <Route index element={<h1>View Clients</h1>} />
-          <Route path='new' element={<h1>New Client</h1>} />
+          <Route path='new-client' element={<h1>New Client</h1>} />
         </Route>
 
         {/* Vendas */}
         <Route path='sales'>
-          <Route index element={<h1>View Sales</h1>} />
-          <Route path='new' element={<h1>New Sale</h1>} />
+          <Route index element={<ListarVendas/>} />
+          <Route path='new-sale' element={
+            <SaleProductsContextProvider>
+              <CriarVenda/>
+            </SaleProductsContextProvider>
+          } />
         </Route>
 
       </Route>

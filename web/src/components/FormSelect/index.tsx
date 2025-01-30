@@ -3,7 +3,7 @@ import { InputContainer, SelectContent, SelectItem, SelectItemIndicator, SelectT
 import { IconProps } from "phosphor-react";
 
 interface InputProps {
-  label: string
+  label?: string
   placeholder: string
   required?: boolean
   options: {
@@ -13,15 +13,20 @@ interface InputProps {
   CheckedIcon?: React.ForwardRefExoticComponent<IconProps & React.RefAttributes<SVGSVGElement>>
   value: string,
   onChange: (newValue : string) => void
+  disabled?: boolean
 }
 
-export function FormSelect({ label, placeholder, options, value, onChange, CheckedIcon}: InputProps) {
+export function FormSelect({ label, placeholder, options, value, onChange, CheckedIcon, disabled = false}: InputProps) {
   return (
     <InputContainer>
-      <span>{label}</span>
+      {
+        label &&
+        <span>{label}</span>
+      }
       <Select.Root
         value={value}
         onValueChange={onChange}
+        disabled={disabled}
       >
         <SelectTrigger>
           <Select.Value placeholder={placeholder} />
