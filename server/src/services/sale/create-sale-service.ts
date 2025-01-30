@@ -1,29 +1,26 @@
-import { PrismaClient, Prisma, Sale } from '@prisma/client'
-import { DefaultArgs } from '@prisma/client/runtime/library'
+import { PrismaClient, Prisma, Sale } from '@prisma/client';
+import { DefaultArgs } from '@prisma/client/runtime/library';
 
-interface CreateSaleServiceParams {
-  client: string
-  salesperson: string
-  paymentMethod: string
-  coupon?: string
-  deliveryFee: number
+// Export the interfaces
+export interface CreateSaleServiceParams {
+  client: string;
+  salesperson: string;
+  paymentMethod: string;
+  coupon?: string;
+  deliveryFee: number;
   products: {
-    id: string
-    amount: number
-  }[]
+    id: string;
+    amount: number;
+  }[];
 }
 
-interface CreateSaleServiceResponse {
-  sale: Sale
+export interface CreateSaleServiceResponse {
+  sale: Sale;
 }
 
 export class CreateSaleService {
   constructor(
-    private prisma: PrismaClient<
-      Prisma.PrismaClientOptions,
-      never,
-      DefaultArgs
-    >,
+    private prisma: PrismaClient<Prisma.PrismaClientOptions, never, DefaultArgs>,
   ) {}
 
   async execute({
@@ -44,7 +41,7 @@ export class CreateSaleService {
             },
           }),
       ),
-    )
+    );
     const couponDiscountPercent = !coupon
       ? 0
       : await this.prisma.coupon
@@ -55,16 +52,16 @@ export class CreateSaleService {
           })
           .then((couponInstance) =>
             couponInstance.discount_percentage.toNumber(),
-          )
+          );
 
-    let totalPrice = 0
+    let totalPrice = 0;
 
     productsInstances.forEach(
       (product, index) =>
         (totalPrice += product.price.toNumber() * products[index].amount),
-    )
-    totalPrice += deliveryFee
-    totalPrice *= 1 - couponDiscountPercent / 100
+    );
+    totalPrice += deliveryFee;
+    totalPrice *= 1 - couponDiscountPercent / 100;
 
     const sale = await this.prisma.sale.create({
       data: {
@@ -84,8 +81,8 @@ export class CreateSaleService {
           },
         },
       },
-    })
+    });
 
-    return { sale }
+    return { sale };
   }
 }
