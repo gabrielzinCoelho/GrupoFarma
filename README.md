@@ -18,9 +18,9 @@ Sistema web para administração de farmácia, permitindo o gerenciamento de cli
 ## Estrutura de Pastas
 
 ```
-├── Padroes-Adotados                                                  -- Padrões adotados na execução do projeto
-├── Requisitos                                                        -- Diagramas e requisitos
-├── server                                                            -- Código referente ao Back-end
+├── Padroes-Adotados                                        -- Padrões adotados na execução do projeto
+├── Requisitos                                              -- Diagramas e requisitos
+├── server                                                  -- Código referente ao Back-end
 │   ├── prisma
 │   │   ├── migrations  
 │   │   └── seeds
@@ -32,7 +32,7 @@ Sistema web para administração de farmácia, permitindo o gerenciamento de cli
 │       ├── lib
 │       ├── services
 │       └── @types
-└── web                                                               -- Código referente ao Front-end
+└── web                                                     -- Código referente ao Front-end
     └── src
         ├── assets
         ├── components
