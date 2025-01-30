@@ -26,7 +26,7 @@ export const SelectTrigger = styled(Select.Trigger)`
   border: 1px solid ${(props) => props.theme["slate-500"]};
   border-radius: 12px;
 	gap: 0.5rem;
-  background-color: ${(props) => props.theme["slate-50"]};
+  background-color: ${(props) => props.theme["slate-50"]}; // *
 
   span:first-child{
     font-weight: 400;
@@ -55,7 +55,7 @@ export const SelectTrigger = styled(Select.Trigger)`
 
 export const SelectContent = styled(Select.Content)`
   overflow: hidden;
-  background-color: ${(props) => props.theme["slate-50"]};
+  background-color: ${(props) => props.theme["slate-50"]}; // *
 	border-radius: 12px;
 	box-shadow:
 		0px 10px 38px -10px rgba(22, 23, 24, 0.35),
@@ -63,7 +63,7 @@ export const SelectContent = styled(Select.Content)`
   margin-left: -0.1rem;
 `
 export const SelectViewport = styled(Select.Viewport)`
-  width: var(--radix-select-trigger-width);;
+  width: var(--radix-select-trigger-width);
 `
 
 export const SelectItem = styled(Select.Item)`

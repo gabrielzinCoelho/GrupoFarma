@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 interface ButtonProps {
   widthInRem?: number
+  $paddingInRem?:number
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -13,7 +14,7 @@ export const Button = styled.button<ButtonProps>`
   align-items: center;
 
   background: ${props => props.theme["slate-800"]};
-  padding: 1rem;
+  padding: ${props => props.$paddingInRem ? `${props.$paddingInRem}rem` : '1rem'};
   border-radius: 12px;
   border: 0;
 

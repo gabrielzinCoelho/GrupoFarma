@@ -17,7 +17,6 @@ export function PersonInfoInput({label, profilePic, personName, email} : PersonI
         <InsideBoxText>
             <div className="formSelect">
             <FormSelect 
-              label={""} 
               placeholder={personName} 
               options={[]} 
               value={""} 

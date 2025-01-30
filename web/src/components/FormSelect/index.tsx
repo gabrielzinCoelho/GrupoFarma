@@ -3,7 +3,7 @@ import { InputContainer, SelectContent, SelectItem, SelectItemIndicator, SelectT
 import { IconProps } from "phosphor-react";
 
 interface InputProps {
-  label: string
+  label?: string
   placeholder: string
   required?: boolean
   options: {
@@ -18,7 +18,10 @@ interface InputProps {
 export function FormSelect({ label, placeholder, options, value, onChange, CheckedIcon}: InputProps) {
   return (
     <InputContainer>
-      <span>{label}</span>
+      {
+        label &&
+        <span>{label}</span>
+      }
       <Select.Root
         value={value}
         onValueChange={onChange}
