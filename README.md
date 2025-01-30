@@ -1,6 +1,6 @@
 # Grupo Farma
 
-Sistema web para administração de farmácia, permitindo o gerenciamento de clientes, produtos, vendas e funcionários. O sistema conta com dois tipos de usuários: administradores, com controle total sobre o sistema, e vendedores, com acesso limitado a funcionalidades relacionadas a vendas e clientes.
+Sistema web para administração de uma farmácia, permitindo o gerenciamento de clientes, produtos, vendas e funcionários. O sistema conta com funcionários, que acessam o sistema como usuários e tem acesso total as funcionalidades do sistema.
 
 ## Desenvolvedores
 
@@ -42,4 +42,55 @@ Sistema web para administração de farmácia, permitindo o gerenciamento de cli
         ├── styles
         ├── @types
         └── utils
-```                                   
+```
+                                   
+## Como rodar
+
+1. Clone o repositório
+2. Crie o arquivo .env no diretório server
+```
+server/.env
+
+PORT=3333
+NODE_ENV='dev'
+DATABASE_URL='postgresql://root:root@localhost:5432/grupofarma?schema=public'
+JWT_SECRET=jfshe438483u934kjgmfglmfrdofgkmo49804
+```
+
+3. Adicione um diretorio postgres-data na pasta server, com permissão de acesso
+4. Rode os seguintes comandos no diretório server
+```
+sudo docker compose up
+npm install
+npm run dev
+npx prisma migrate dev
+npx prisma db seed
+npx prisma studio
+```
+
+5. Crie o arquivo .env no diretório web
+```
+web/.env
+
+VITE_API_URL='http://localhost:3333'
+```
+6. Rode os seguintes comandos no diretório web
+```
+npm install
+npm run dev
+```   
+
+## Regras de Uso do Git
+
+- Nomes dos commits não devem exceder 100 caracteres.
+- Nomes dos commits devem ser intuitivos em relação à alteração vinculada;
+
+
+## Boas Práticas de Programação Adotadas
+
+- Todo trecho de código deve estar corretamente identado;
+- Variáveis, métodos, funções, entre outros... devem possuir nomes significativos;
+- Inserir comentários de forma precisa e sucinta, evitando explicações desnecessárias;
+- Utilizar tratamento de erro (try/catch) visando prever erros esperados e inesperados;
+- Nome de classes devem ser substantivos e nome de métodos devem ser verbos.
+- Evitar, sempre que possível, duplicação de código.
